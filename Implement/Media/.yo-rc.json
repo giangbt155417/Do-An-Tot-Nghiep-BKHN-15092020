@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "media"
+    },
+    "jhipsterVersion": "6.10.1",
+    "applicationType": "microservice",
+    "baseName": "Media",
+    "packageName": "media",
+    "packageFolder": "media",
+    "serverPort": "8082",
+    "authenticationType": "uaa",
+    "uaaBaseName": "UAA",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZDY5YjQ2MGFhNTk3YzM1MTZhOTMwZTNlOGNiYjFmOWIzMTFhM2NlNTZmZDIwNjNlZjJkNTA2OGFjNjA4ZjIwOGJiYzAxODcyMjI4MThlNGQwOGRkMDZjYWRlYzA1ZWIzNzhjY2QwZTJjYjY2M2ZkZTM1OTBjYjdiOTJmZTg0ODY=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1600275763269,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
