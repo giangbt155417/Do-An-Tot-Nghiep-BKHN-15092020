@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "program"
+    },
+    "jhipsterVersion": "6.10.1",
+    "applicationType": "microservice",
+    "baseName": "Program",
+    "packageName": "program",
+    "packageFolder": "program",
+    "serverPort": "8081",
+    "authenticationType": "uaa",
+    "uaaBaseName": "UAA",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "YmE1ODdlYmQwZjFmYjgwN2M4OWQwMmUzYmFlZjhhODg0MTExYjAxN2M4MjMwZTllYzM4YTcyNjM2NjFiYjZkMDZkZTA2YmNlNTViMGI4NTBjOTgyNmEwOTZmZDY4NGEyNTkxMjhmZTYzYmJjOTNlNmMxNjZhZTQ4ZDk3OWRjOGQ=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1600274232385,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
