@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'app/core/login/login.service';
 
 @Component({
-  selector: 'jhi-login-modal',
+  selector: 'app-login-modal',
   templateUrl: './login.component.html',
 })
 export class LoginModalComponent implements AfterViewInit {

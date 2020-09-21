@@ -1,0 +1,42 @@
+$background-color-header: #2851c5;
+
+button {
+  background: #c8c8c8;
+  color: #fff;
+  padding: 10px;
+  outline: none;
+  border: none;
+}
+
+label {
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  background: $background-color-header;
+  height: 56px;
+  padding: 8px;
+}
+
+.title {
+  justify-content: center;
+  align-content: center;
+  color: #fff;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.setting {
+  position: absolute;
+  right: 3.5%;
+  top: 16px;
+}
+
+.logout {
+  position: absolute;
+  right: 1%;
+  top: 14px;
+}

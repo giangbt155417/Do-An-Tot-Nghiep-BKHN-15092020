@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JhiAlertService, JhiAlert } from 'ng-jhipster';
 
 @Component({
-  selector: 'jhi-alert',
+  selector: 'app-alert',
   template: ` <div class="alerts" role="alert">
     <div *ngFor="let alert of alerts" [ngClass]="setClasses(alert)">
       <ngb-alert *ngIf="alert && alert.type && alert.msg" [type]="alert.type" (close)="close(alert)">

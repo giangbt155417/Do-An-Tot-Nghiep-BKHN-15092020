@@ -6,14 +6,15 @@ import { GatewaySharedModule } from 'app/shared/shared.module';
 import { GatewayCoreModule } from 'app/core/core.module';
 import { GatewayAppRoutingModule } from './app-routing.module';
 import { GatewayHomeModule } from './home/home.module';
-import { GatewayEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { MainComponent } from './layouts/main/main.component';
-import { NavbarComponent } from './layouts/navbar/navbar.component';
-import { FooterComponent } from './layouts/footer/footer.component';
-import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
-import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
+import { RouteManagementComponent } from './modules/route-management/route-management.component';
+import { MediaManagementComponent } from './modules/media-management/media-management.component';
+import { UserManagementComponent } from './modules/user-management/user-management.component';
+import { LcdContentEditorComponent } from './modules/lcd-content-editor/lcd-content-editor.component';
+import { NearbyPlacesManagementComponent } from './modules/nearby-places-management/nearby-places-management.component';
+import { BusStopListManagementComponent } from './modules/bus-stop-list-management/bus-stop-list-management.component';
 
 @NgModule({
   imports: [
@@ -22,10 +23,18 @@ import { ErrorComponent } from './layouts/error/error.component';
     GatewayCoreModule,
     GatewayHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
-    GatewayEntityModule,
     GatewayAppRoutingModule,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [
+    MainComponent,
+    ErrorComponent,
+    RouteManagementComponent,
+    MediaManagementComponent,
+    UserManagementComponent,
+    LcdContentEditorComponent,
+    NearbyPlacesManagementComponent,
+    BusStopListManagementComponent,
+  ],
   bootstrap: [MainComponent],
 })
 export class GatewayAppModule {}

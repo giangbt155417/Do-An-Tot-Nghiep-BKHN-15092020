@@ -15,7 +15,7 @@ import { AccountService } from 'app/core/auth/account.service';
  * ```
  */
 @Directive({
-  selector: '[jhiHasAnyAuthority]',
+  selector: '[appHasAnyAuthority]',
 })
 export class HasAnyAuthorityDirective implements OnDestroy {
   private authorities: string[] = [];

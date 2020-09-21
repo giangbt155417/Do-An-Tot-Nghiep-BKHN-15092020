@@ -91,6 +91,11 @@
     "workbox-webpack-plugin": "5.1.3",
     "write-file-webpack-plugin": "4.5.1"
   },
+  "browser": {
+    "path": false,
+    "fs": false,
+    "crypto": false
+  },
   "engines": {
     "node": ">=12.16.1"
   },
