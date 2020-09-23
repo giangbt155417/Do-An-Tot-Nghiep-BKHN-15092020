@@ -1,7 +1,5 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
 
 import { LoginService } from 'app/core/login/login.service';
 
@@ -13,7 +11,12 @@ export class LoginModalComponent implements AfterViewInit {
   @ViewChild('username', { static: false })
   username?: ElementRef;
 
+  @ViewChild('password')
+  password?: ElementRef;
+
   authenticationError = false;
+
+  @Output() loginSuccess = new EventEmitter<any>();
 
   loginForm = this.fb.group({
     username: [''],
@@ -21,7 +24,7 @@ export class LoginModalComponent implements AfterViewInit {
     rememberMe: [false],
   });
 
-  constructor(private loginService: LoginService, private router: Router, public activeModal: NgbActiveModal, private fb: FormBuilder) {}
+  constructor(private loginService: LoginService, private fb: FormBuilder) {}
 
   ngAfterViewInit(): void {
     if (this.username) {
@@ -29,45 +32,47 @@ export class LoginModalComponent implements AfterViewInit {
     }
   }
 
-  cancel(): void {
-    this.authenticationError = false;
-    this.loginForm.patchValue({
-      username: '',
-      password: '',
-    });
-    this.activeModal.dismiss('cancel');
-  }
+  // cancel(): void {
+  //   this.authenticationError = false;
+  //   this.loginForm.patchValue({
+  //     username: '',
+  //     password: '',
+  //   });
+  // }
 
   login(): void {
     this.loginService
       .login({
         username: this.loginForm.get('username')!.value,
         password: this.loginForm.get('password')!.value,
-        rememberMe: this.loginForm.get('rememberMe')!.value,
+        rememberMe: false,
       })
       .subscribe(
         () => {
+          this.loginSuccess.emit(this.loginForm.get('username')!.value);
           this.authenticationError = false;
-          this.activeModal.close();
-          if (
-            this.router.url === '/account/register' ||
-            this.router.url.startsWith('/account/activate') ||
-            this.router.url.startsWith('/account/reset/')
-          ) {
-            this.router.navigate(['']);
-          }
         },
-        () => (this.authenticationError = true)
+        () => {
+          alert('Login failed!');
+          this.authenticationError = true;
+        }
       );
   }
 
-  register(): void {
-    this.activeModal.dismiss('to state register');
-    this.router.navigate(['/account/register']);
-  }
+  // login(): void {
+  //   const username = this.loginForm.get('username')!.value;
+  //   const password = this.loginForm.get('password')!.value;
 
-  requestResetPassword(): void {
-    this.activeModal.dismiss('to state requestReset');
-    this.router.navigate(['/account/reset', 'request']);
-  }
+  //   this.loginService
+  //     .login({
+  //       username: username,
+  //       password: password,
+  //       rememberMe: false
+  //     })
+  //     .subscribe(
+  //       () => {
+  //         this.loginSuccess.emit(username);
+  //       },
+  //     );
+  // }
 }

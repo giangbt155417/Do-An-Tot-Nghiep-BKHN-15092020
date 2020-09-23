@@ -1,14 +1,27 @@
-<head>
+<header>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+</header>
 
 <body>
     <section>
-        <div class="main-layout">
-            <div class="header">
-                <div class="title">
+        <div class="main-layout" style="background: #fff;
+        height: 937px;">
+            <div class="header" *ngIf="isHeader">
+                <!-- <div class="icon-title">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                            fill="#fff" width="36" height="36" viewBox="0 0 24 24">
+                            <path
+                                d="M10 5C5.58 5 2 5.5 2 9V19C2 19.85 2.37 20.66 3 21.22V23C3 23.55 3.45 24 4 24H5C5.55 24 6 23.55 6 23V22H14V23C14 23.55 14.45 24 15 24H16C16.55 24 17 23.55 17 23V21.22C17.63 20.66 18 19.85 18 19V9C18 5.5 14.42 5 10 5M5.5 20C4.67 20 4 19.33 4 18.5S4.67 17 5.5 17 7 17.67 7 18.5 6.33 20 5.5 20M14.5 20C13.67 20 13 19.33 13 18.5S13.67 17 14.5 17 16 17.67 16 18.5 15.33 20 14.5 20M16 14H4V9H16V14M22 5V15C22 15.85 21.63 16.66 21 17.22V19C21 19.55 20.55 20 20 20H19.88C19.95 19.68 20 19.35 20 19V9C20 3 13 3 10 3C9.09 3 7.8 3 6.46 3.17C7.55 1.32 10.5 1 14 1C18.42 1 22 1.5 22 5Z" />
+                        </svg>
+                    </span>
+                </div> -->
+                <div class="title" style="margin-top: 4px; padding-left: 86px;">
                     <label>Public Transport Management</label>
+                </div>
+                <div class="title" style="position: absolute; right: 6%; top: 1.25%">
+                    <label>{{userName}}</label>
                 </div>
                 <div class="setting">
                     <a>
@@ -34,15 +47,113 @@
                             </g>
                         </svg>
                     </a>
+                    <ul>
+                        <li></li>
+                    </ul>
                 </div>
                 <div class="logout">
-                    <a>
+                    <a (click)="signOut()">
                         <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 0 24 24" width="30" fill="#fff">
                             <path d="M0 0h24v24H0z" fill="none" />
                             <path
                                 d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
                         </svg>
                     </a>
+                </div>
+            </div>
+            <div style="display: flex; height: calc(100% - 56px);">
+                <div *ngIf="isHeader" class="nav-bar">
+                    <ul>
+                        <li style="padding-bottom: 100px; padding-top: 30px;">
+                            <span style="margin-left: 30px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    version="1.1" fill="#6D54FC" width="36" height="36" viewBox="0 0 24 24">
+                                    <path
+                                        d="M10 5C5.58 5 2 5.5 2 9V19C2 19.85 2.37 20.66 3 21.22V23C3 23.55 3.45 24 4 24H5C5.55 24 6 23.55 6 23V22H14V23C14 23.55 14.45 24 15 24H16C16.55 24 17 23.55 17 23V21.22C17.63 20.66 18 19.85 18 19V9C18 5.5 14.42 5 10 5M5.5 20C4.67 20 4 19.33 4 18.5S4.67 17 5.5 17 7 17.67 7 18.5 6.33 20 5.5 20M14.5 20C13.67 20 13 19.33 13 18.5S13.67 17 14.5 17 16 17.67 16 18.5 15.33 20 14.5 20M16 14H4V9H16V14M22 5V15C22 15.85 21.63 16.66 21 17.22V19C21 19.55 20.55 20 20 20H19.88C19.95 19.68 20 19.35 20 19V9C20 3 13 3 10 3C9.09 3 7.8 3 6.46 3.17C7.55 1.32 10.5 1 14 1C18.42 1 22 1.5 22 5Z" />
+                                </svg>
+                            </span>
+                        </li>
+                        <li class="tooltip">
+                            <a href="#home">
+                                <svg width="30" height="28" viewBox="0 0 18 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16 2.94H9.529C9.36588 2.93998 9.20525 2.90005 9.0611 2.82371C8.91695 2.74737 8.79367 2.63692 8.702 2.502L7.297 0.437C7.20531 0.302405 7.08214 0.192241 6.93818 0.116082C6.79423 0.0399228 6.63386 7.44204e-05 6.471 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V14C0 14.5304 0.210714 15.0391 0.585786 15.4142C0.960859 15.7893 1.46957 16 2 16H16C16.5304 16 17.0391 15.7893 17.4142 15.4142C17.7893 15.0391 18 14.5304 18 14V4.94C18 4.40957 17.7893 3.90086 17.4142 3.52579C17.0391 3.15071 16.5304 2.94 16 2.94Z"
+                                        fill="#6D54FC" />
+                                </svg>
+                            </a>
+                            <span class="tooltiptext">Project Management</span>
+                        </li>
+                        <li class="tooltip">
+                            <a href="#news">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    version="1.1" width="32" height="30" viewBox="4 0 18 16" fill="none">
+                                    <path
+                                        d="M18.1,4.8C18,4.3 17.6,4 17.1,4H13L13.2,7H10.8L11,4H6.8C6.3,4 5.9,4.4 5.8,4.8L3.1,18.8C3,19.4 3.5,20 4.1,20H10L10.3,15H13.7L14,20H19.8C20.4,20 20.9,19.4 20.8,18.8L18.1,4.8M10.4,13L10.6,9H13.2L13.4,13H10.4Z"
+                                        fill="#6D54FC" />
+                                </svg>
+                            </a>
+                            <span class="tooltiptext">Route Management</span>
+                        </li>
+                        <li class="tooltip">
+                            <a href="#contact" style="padding-left: 22px;">
+                                <svg width="40" height="32" viewBox="3 2 20 17" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M22 7V16C22 16.71 21.62 17.36 21 17.72V19.25C21 19.66 20.66 20 20.25 20H19.75C19.34 20 19 19.66 19 19.25V18H12V19.25C12 19.66 11.66 20 11.25 20H10.75C10.34 20 10 19.66 10 19.25V17.72C9.39 17.36 9 16.71 9 16V7C9 4 12 4 15.5 4S22 4 22 7M13 15C13 14.45 12.55 14 12 14S11 14.45 11 15 11.45 16 12 16 13 15.55 13 15M20 15C20 14.45 19.55 14 19 14S18 14.45 18 15 18.45 16 19 16 20 15.55 20 15M20 7H11V11H20V7M7 9.5C6.97 8.12 5.83 7 4.45 7.05C3.07 7.08 1.97 8.22 2 9.6C2.03 10.77 2.86 11.77 4 12V20H5V12C6.18 11.76 7 10.71 7 9.5Z"
+                                        fill="#6D54FC" />
+                                </svg>
+                            </a>
+                            <span class="tooltiptext">Bus Stop Management</span>
+                        </li>
+                        <li class="tooltip">
+                            <a href="#about">
+                                <svg width="30" height="28" viewBox="0 0 18 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16 2.94H9.529C9.36588 2.93998 9.20525 2.90005 9.0611 2.82371C8.91695 2.74737 8.79367 2.63692 8.702 2.502L7.297 0.437C7.20531 0.302405 7.08214 0.192241 6.93818 0.116082C6.79423 0.0399228 6.63386 7.44204e-05 6.471 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V14C0 14.5304 0.210714 15.0391 0.585786 15.4142C0.960859 15.7893 1.46957 16 2 16H16C16.5304 16 17.0391 15.7893 17.4142 15.4142C17.7893 15.0391 18 14.5304 18 14V4.94C18 4.40957 17.7893 3.90086 17.4142 3.52579C17.0391 3.15071 16.5304 2.94 16 2.94Z"
+                                        fill="#6D54FC" />
+                                </svg>
+                            </a>
+                            <span class="tooltiptext">Nearby Places Management</span>
+                        </li>
+                        <li class="tooltip">
+                            <a href="#about">
+                                <svg width="32" height="28" viewBox="1 3 22 19" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M21,17H3V5H21M21,3H3A2,2 0 0,0 1,5V17A2,2 0 0,0 3,19H8V21H16V19H21A2,2 0 0,0 23,17V5A2,2 0 0,0 21,3Z"
+                                        fill="#6D54FC" />
+                                </svg>
+                            </a>
+                            <span class="tooltiptext">LCD Content Editor</span>
+                        </li>
+                        <li class="tooltip">
+                            <a href="#about">
+                                <svg width="32" height="28" viewBox="3 4 18 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16.5,12A2.5,2.5 0 0,0 19,9.5A2.5,2.5 0 0,0 16.5,7A2.5,2.5 0 0,0 14,9.5A2.5,2.5 0 0,0 16.5,12M9,11A3,3 0 0,0 12,8A3,3 0 0,0 9,5A3,3 0 0,0 6,8A3,3 0 0,0 9,11M16.5,14C14.67,14 11,14.92 11,16.75V19H22V16.75C22,14.92 18.33,14 16.5,14M9,13C6.67,13 2,14.17 2,16.5V19H9V16.75C9,15.9 9.33,14.41 11.37,13.28C10.5,13.1 9.66,13 9,13Z"
+                                        fill="#6D54FC" />
+                                </svg>
+                            </a>
+                            <span class="tooltiptext">User Management</span>
+                        </li>
+                        <!-- <li class="tooltip">
+                            <a href="#about">
+                                <svg width="30" height="28" viewBox="0 0 18 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16 2.94H9.529C9.36588 2.93998 9.20525 2.90005 9.0611 2.82371C8.91695 2.74737 8.79367 2.63692 8.702 2.502L7.297 0.437C7.20531 0.302405 7.08214 0.192241 6.93818 0.116082C6.79423 0.0399228 6.63386 7.44204e-05 6.471 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V14C0 14.5304 0.210714 15.0391 0.585786 15.4142C0.960859 15.7893 1.46957 16 2 16H16C16.5304 16 17.0391 15.7893 17.4142 15.4142C17.7893 15.0391 18 14.5304 18 14V4.94C18 4.40957 17.7893 3.90086 17.4142 3.52579C17.0391 3.15071 16.5304 2.94 16 2.94Z"
+                                        fill="#6D54FC" />
+                                </svg>
+                            </a>
+                            <span class="tooltiptext">Tooltip text</span>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="component-dynamic">
+                    <ng-template #moduleLayout></ng-template>
                 </div>
             </div>
         </div>

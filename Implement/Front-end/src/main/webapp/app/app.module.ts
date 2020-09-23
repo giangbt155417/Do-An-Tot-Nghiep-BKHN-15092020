@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import './vendor';
 import { GatewaySharedModule } from 'app/shared/shared.module';
@@ -15,15 +17,21 @@ import { UserManagementComponent } from './modules/user-management/user-manageme
 import { LcdContentEditorComponent } from './modules/lcd-content-editor/lcd-content-editor.component';
 import { NearbyPlacesManagementComponent } from './modules/nearby-places-management/nearby-places-management.component';
 import { BusStopListManagementComponent } from './modules/bus-stop-list-management/bus-stop-list-management.component';
+import { DialogConfirmComponent } from './layouts/dialog/dialog-confirm/dialog-confirm.component';
+import { DialogMessageComponent } from './layouts/dialog/dialog-message/dialog-message.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
+    CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
     GatewaySharedModule,
     GatewayCoreModule,
     GatewayHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     GatewayAppRoutingModule,
+    MatDialogModule,
   ],
   declarations: [
     MainComponent,
@@ -34,6 +42,8 @@ import { BusStopListManagementComponent } from './modules/bus-stop-list-manageme
     LcdContentEditorComponent,
     NearbyPlacesManagementComponent,
     BusStopListManagementComponent,
+    DialogConfirmComponent,
+    DialogMessageComponent,
   ],
   bootstrap: [MainComponent],
 })

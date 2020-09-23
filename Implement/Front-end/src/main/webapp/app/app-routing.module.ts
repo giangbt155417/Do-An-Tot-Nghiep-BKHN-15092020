@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { errorRoute } from './layouts/error/error.route';
+import { RouterModule, Routes } from '@angular/router';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
+import { MainComponent } from './layouts/main/main.component';
 
-const LAYOUT_ROUTES = [...errorRoute];
+const routes: Routes = [{ path: '', component: MainComponent }];
 
 @NgModule({
-  imports: [RouterModule.forRoot([...LAYOUT_ROUTES], { enableTracing: DEBUG_INFO_ENABLED })],
+  imports: [RouterModule.forRoot(routes, { enableTracing: DEBUG_INFO_ENABLED })],
   exports: [RouterModule],
 })
 export class GatewayAppRoutingModule {}
