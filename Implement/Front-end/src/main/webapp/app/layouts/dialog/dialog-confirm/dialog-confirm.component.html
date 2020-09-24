@@ -1,1 +1,18 @@
-<p>dialog-confirm works!</p>
+<div class="modal show">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+                <h4 class="modal-title pull-left">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="lable-confirm">{{data.text}}</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-success" [mat-dialog-close]=true>{{data.button1}}</button>
+                <button type="button" class="btn btn-primary" mat-dialog-close>{{data.button2}}</button>
+            </div>
+        </div>
+    </div>
+</div>

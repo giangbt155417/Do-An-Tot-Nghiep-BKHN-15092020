@@ -20,10 +20,13 @@ import { BusStopListManagementComponent } from './modules/bus-stop-list-manageme
 import { DialogConfirmComponent } from './layouts/dialog/dialog-confirm/dialog-confirm.component';
 import { DialogMessageComponent } from './layouts/dialog/dialog-message/dialog-message.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProjectManagementComponent } from './modules/project-management/project-management.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     GatewaySharedModule,
@@ -44,7 +47,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     BusStopListManagementComponent,
     DialogConfirmComponent,
     DialogMessageComponent,
+    ProjectManagementComponent,
   ],
+  entryComponents: [DialogConfirmComponent, DialogMessageComponent],
   bootstrap: [MainComponent],
 })
 export class GatewayAppModule {}

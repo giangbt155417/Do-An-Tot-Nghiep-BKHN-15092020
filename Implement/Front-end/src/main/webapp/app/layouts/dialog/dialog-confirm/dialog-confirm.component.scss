@@ -1,0 +1,18 @@
+::ng-deep .mat-dialog-container {
+  padding: 0 !important;
+}
+
+.modal-dialog {
+  width: 354px;
+  margin: 30px auto;
+}
+
+.btn-primary:focus {
+  outline: none;
+}
+
+.lable-confirm {
+  width: 324px;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
