@@ -4,6 +4,24 @@
             <label style="font-size: 16px; font-weight: 500; font-family: Roboto;">Project Management</label>
         </div>
         <div style="width: calc(100% - 330px)"></div>
+        <!-- <div>
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                    width="18" height="18" viewBox="0 0 24 24">
+                    <path
+                        d="M3 11H11V3H3M5 5H9V9H5M13 21H21V13H13M15 15H19V19H15M3 21H11V13H3M5 15H9V19H5M13 3V11H21V3M19 9H15V5H19Z" />
+                </svg>
+            </span>
+        </div>
+        <div>
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                    width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                        d="M3 5V19H20V5H3M7 7V9H5V7H7M5 13V11H7V13H5M5 15H7V17H5V15M18 17H9V15H18V17M18 13H9V11H18V13M18 9H9V7H18V9Z" />
+                </svg>
+            </span>
+        </div> -->
         <div class="input-search">
             <span>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -188,17 +206,49 @@
         </div>
         <div style="width: 2%;"></div>
         <div class="project-action">
-            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 60%;">
+            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 28.5%;">
                 <div class="title">
-                    <label>Quick Actions</label>
+                    <label>Actions</label>
                 </div>
                 <div class="action-list">
-
+                    <div class="action-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 1 24 24">
+                                <path
+                                    d="M10,4L12,6H20A2,2 0 0,1 22,8V18A2,2 0 0,1 20,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10M15,9V12H12V14H15V17H17V14H20V12H17V9H15Z"
+                                    fill="#595959" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)" (click)="createProject()"><span>Create Project</span></a>
+                    </div>
+                    <div class="action-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 1 24 24">
+                                <path
+                                    d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+                                    fill="#595959" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)" (click)="editProject()"><span>Edit Project</span></a>
+                    </div>
+                    <div class="action-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 1 24 24">
+                                <path
+                                    d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                                    fill="#595959" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)" (click)="deleteProject()"><span>Delete Project</span></a>
+                    </div>
                 </div>
             </div>
             <div style="height: 2%;"></div>
-            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 38%;">
-                <div class="title">Note</div>
+            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 69.5%;">
+                <div class="title">Detail Selected Project</div>
             </div>
         </div>
     </div>

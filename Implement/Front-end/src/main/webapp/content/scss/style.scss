@@ -1,4 +1,8 @@
 $background-color-header: #5d44fb;
+$color-text-small: #8c8c8c;
+$color-text-normal: #595959;
+$color-border: #dde0e7;
+$color-main: #ece8ff;
 
 button {
   background: #c8c8c8;
@@ -24,6 +28,48 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.w-50 {
+  width: 50px !important;
+}
+
+.w-100 {
+  width: 100px !important;
+}
+
+.w-150 {
+  width: 150px !important;
+}
+
+.w-200 {
+  width: 200px !important;
+}
+
+.w-250 {
+  width: 250px !important;
+}
+
+.w-300 {
+  width: 300px !important;
+}
+
+.main-layout {
+  background: #fff;
+  height: 937px;
+}
+
+.input-search {
+  height: 24px;
+  width: 180px;
+  position: relative;
+}
+
+.input-search span {
+  position: absolute;
+  position: absolute;
+  right: 4%;
+  bottom: 10%;
 }
 
 .nav-bar {
@@ -122,8 +168,15 @@ ul {
   flex-direction: column;
 }
 
-.component-dynamic:not(login-screen-flex) {
-  width: calc(100% - 96px);
+.login-screen-col-2 {
+  background: #f0f0f0;
+  width: calc(100% - 800px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.component-dynamic {
 }
 
 .modal {
@@ -213,4 +266,53 @@ ul {
 .modal-footer .link-forget a {
   color: #262626;
   font-size: 9px;
+}
+
+// Table
+.table-grid {
+  display: table;
+  width: 100%;
+  font-family: Roboto;
+  position: relative;
+  font-size: 14px;
+  font-style: normal;
+}
+
+.table-head {
+  background-color: #fff;
+  display: table-header-group;
+  color: $color-text-normal;
+  font-weight: 500;
+}
+
+.table-body {
+  display: table-row-group;
+  background: #fff;
+  font-weight: normal;
+}
+
+.table-row {
+  display: table-row;
+}
+
+.table-head .table-col {
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.table-col {
+  display: table-cell;
+  padding: 6px 8px;
+  white-space: nowrap;
+  border-bottom: 1px solid #e8eaff;
+}
+
+.table-col:last-child {
+  border-right: none;
+}
+
+.table-grid .table-body .table-row:hover {
+  background: #f1f3f5;
 }

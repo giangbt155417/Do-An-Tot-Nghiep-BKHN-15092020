@@ -10,4 +10,10 @@ export class ProjectManagementComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  public createProject() {}
+
+  public editProject() {}
+
+  public deleteProject() {}
 }

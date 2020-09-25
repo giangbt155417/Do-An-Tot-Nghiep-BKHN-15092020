@@ -9,4 +9,10 @@ export class RouteManagementComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  public createRoute() {}
+
+  public editRoute() {}
+
+  public deleteRoute() {}
 }

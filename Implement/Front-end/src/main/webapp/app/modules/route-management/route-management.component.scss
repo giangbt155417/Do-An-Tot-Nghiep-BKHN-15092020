@@ -1,0 +1,88 @@
+$color-text-small: #8c8c8c;
+$color-text-normal: #595959;
+$color-border: #dde0e7;
+$color-main: #ece8ff;
+
+input {
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid $color-border;
+  box-sizing: border-box;
+  border-radius: 4px;
+  outline: none;
+  color: $color-text-small;
+  font-size: 14px;
+}
+
+.route-list-screen {
+  padding-left: 10px;
+  height: 100%;
+}
+
+.route-list-screen .header-screen {
+  display: inline-flex;
+  width: 80%;
+  padding: 20px 0 20px 0;
+}
+
+.route-list-screen .body-screen {
+  display: flex;
+  height: calc(100% - 65px);
+}
+
+.route-list {
+  width: 80%;
+  background: $color-main;
+  padding-top: 8px;
+  padding-left: 18px;
+  padding-right: 18px;
+  border: 1px solid $color-border;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+.route-list-action {
+  width: 18%;
+  background: #fff;
+  box-sizing: border-box;
+  padding-right: 10px;
+}
+
+.route-list-action .title {
+  padding: 8px;
+  border-bottom: 1px solid $color-border;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: #a999fe;
+}
+
+.action-list {
+  padding-top: 18px;
+}
+
+.action-list a span {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.action-list .action-item {
+  padding: 8px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+a .text-span {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}

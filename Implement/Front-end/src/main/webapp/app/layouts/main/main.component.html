@@ -5,8 +5,7 @@
 
 <body>
     <section>
-        <div class="main-layout" style="background: #fff;
-        height: 937px;">
+        <div class="main-layout">
             <div class="header" *ngIf="isHeader">
                 <!-- <div class="icon-title">
                     <span>
@@ -61,7 +60,7 @@
                     </a>
                 </div>
             </div>
-            <div style="display: flex; height: calc(100% - 56px);">
+            <div style="display: flex;" [ngStyle]="{'height': !isHeader ? '100%':'calc(100% - 56px)'}">
                 <div *ngIf="isHeader" class="nav-bar">
                     <ul>
                         <li style="padding-bottom: 100px; padding-top: 30px;">
@@ -74,7 +73,8 @@
                             </span>
                         </li>
                         <li class="tooltip">
-                            <a href="javascript:void(0)" (click)="selectComponent(entryComponents[FIELD_COMPONENT.ProjectManagementComponent])"> 
+                            <a href="javascript:void(0)"
+                                (click)="selectComponent(entryComponents[FIELD_COMPONENT.ProjectManagementComponent])">
                                 <svg width="30" height="28" viewBox="0 0 18 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -85,7 +85,8 @@
                             <span class="tooltiptext">Project Management</span>
                         </li>
                         <li class="tooltip">
-                            <a href="javascript:void(0)" (click)="selectComponent(entryComponents[FIELD_COMPONENT.RouteManagementComponent])">
+                            <a href="javascript:void(0)"
+                                (click)="selectComponent(entryComponents[FIELD_COMPONENT.RouteManagementComponent])">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                     version="1.1" width="32" height="30" viewBox="4 0 18 16" fill="none">
                                     <path
@@ -96,7 +97,9 @@
                             <span class="tooltiptext">Route Management</span>
                         </li>
                         <li class="tooltip">
-                            <a href="javascript:void(0)" (click)="selectComponent(entryComponents[FIELD_COMPONENT.BusStopListManagementComponent])" style="padding-left: 22px;">
+                            <a href="javascript:void(0)"
+                                (click)="selectComponent(entryComponents[FIELD_COMPONENT.BusStopListManagementComponent])"
+                                style="padding-left: 22px;">
                                 <svg width="40" height="32" viewBox="3 2 20 17" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -107,7 +110,8 @@
                             <span class="tooltiptext">Bus Stop Management</span>
                         </li>
                         <li class="tooltip">
-                            <a href="javascript:void(0)" (click)="selectComponent(entryComponents[FIELD_COMPONENT.NearbyPlacesManagementComponent])">
+                            <a href="javascript:void(0)"
+                                (click)="selectComponent(entryComponents[FIELD_COMPONENT.NearbyPlacesManagementComponent])">
                                 <svg width="30" height="28" viewBox="0 0 18 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -118,7 +122,8 @@
                             <span class="tooltiptext">Nearby Places Management</span>
                         </li>
                         <li class="tooltip">
-                            <a href="javascript:void(0)" (click)="selectComponent(entryComponents[FIELD_COMPONENT.LcdContentEditorComponent])">
+                            <a href="javascript:void(0)"
+                                (click)="selectComponent(entryComponents[FIELD_COMPONENT.LcdContentEditorComponent])">
                                 <svg width="32" height="28" viewBox="1 3 22 19" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -129,7 +134,8 @@
                             <span class="tooltiptext">LCD Content Editor</span>
                         </li>
                         <li class="tooltip">
-                            <a href="javascript:void(0)" (click)="selectComponent(entryComponents[FIELD_COMPONENT.UserManagementComponent])">
+                            <a href="javascript:void(0)"
+                                (click)="selectComponent(entryComponents[FIELD_COMPONENT.UserManagementComponent])">
                                 <svg width="32" height="28" viewBox="3 4 18 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -152,7 +158,7 @@
                         </li> -->
                     </ul>
                 </div>
-                <div class="component-dynamic">
+                <div class="component-dynamic" [ngStyle]="{'width': !isHeader ? '100%':'calc(100% - 96px)'}">
                     <ng-template #moduleLayout></ng-template>
                 </div>
             </div>
