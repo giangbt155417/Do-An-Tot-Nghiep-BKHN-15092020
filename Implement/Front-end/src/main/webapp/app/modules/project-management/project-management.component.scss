@@ -1,0 +1,123 @@
+$color-text-small: #8c8c8c;
+$color-text-normal: #595959;
+$color-border: #dde0e7;
+$color-main: #ece8ff;
+
+input {
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid $color-border;
+  box-sizing: border-box;
+  border-radius: 4px;
+  outline: none;
+  color: $color-text-small;
+  font-size: 14px;
+}
+
+.input-search {
+  height: 24px;
+  width: 180px;
+  position: relative;
+}
+
+.input-search span {
+  position: absolute;
+  position: absolute;
+  right: 4%;
+  bottom: 10%;
+}
+
+.project-screen {
+  padding-left: 10px;
+  height: 100%;
+}
+
+.project-screen .header-screen {
+  display: inline-flex;
+  width: 80%;
+  padding: 20px 0 20px 0;
+}
+
+.project-screen .body-screen {
+  display: flex;
+  height: calc(100% - 65px);
+}
+
+.project-list {
+  width: 80%;
+  background: $color-main;
+  padding-top: 22px;
+  padding-left: 6px;
+  border: 1px solid $color-border;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+.project-list .no-data {
+  position: absolute;
+  top: 50%;
+  left: 37%;
+  padding: 0;
+}
+
+.project-action {
+  width: 18%;
+  background: #fff;
+  box-sizing: border-box;
+  padding-right: 10px;
+}
+
+.project-list .list {
+  display: flex;
+  justify-content: start;
+  flex-flow: row wrap;
+}
+
+.project-list .list .item-list {
+  height: 163px;
+  width: 336px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e8eaef;
+  box-sizing: border-box;
+  margin: 12px;
+  padding: 10px;
+}
+
+.line-break {
+  width: 100%;
+}
+
+.project-name-text {
+  margin: 0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 32px;
+  color: $color-text-normal;
+}
+
+.item-list-detail {
+  height: 24px;
+  width: 100%;
+  display: inline-flex;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 26px;
+  color: $color-text-small;
+}
+
+.project-action .title {
+  padding: 8px;
+  border-bottom: 1px solid $color-border;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: #a999fe;
+}

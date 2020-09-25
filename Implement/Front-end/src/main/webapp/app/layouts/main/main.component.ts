@@ -9,10 +9,12 @@ import { NearbyPlacesManagementComponent } from 'app/modules/nearby-places-manag
 import { MediaManagementComponent } from 'app/modules/media-management/media-management.component';
 import { LcdContentEditorComponent } from 'app/modules/lcd-content-editor/lcd-content-editor.component';
 import { BusStopListManagementComponent } from 'app/modules/bus-stop-list-management/bus-stop-list-management.component';
+import { ProjectManagementComponent } from 'app/modules/project-management/project-management.component';
 import { FIELD_COMPONENT } from '../../utils/constants';
 import { Subscription } from 'rxjs';
 import { DialogService } from '../../services/dialog.service';
 import { DialogConfirmComponent } from '../dialog/dialog-confirm/dialog-confirm.component';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -23,6 +25,7 @@ export class MainComponent implements OnInit, AfterViewInit {
    */
   entryComponents = [
     LoginModalComponent,
+    ProjectManagementComponent,
     UserManagementComponent,
     RouteManagementComponent,
     NearbyPlacesManagementComponent,
@@ -111,15 +114,25 @@ export class MainComponent implements OnInit, AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
+  public selectComponent(component: any) {
+    if (this.componentRef) {
+      this.componentRef.destroy();
+    }
+    const factory = this.componentFactoryResolver.resolveComponentFactory(component);
+    this.moduleLayout.clear();
+    this.componentRef = this.moduleLayout.createComponent(factory);
+    this.changeDetectorRef.detectChanges();
+  }
+
   public signOut() {
     this.dialogService.showDialog(
       DialogConfirmComponent,
       {
-        // data: {
-        //   text: `Do you want to log out?`,
-        //   button1: "Yes",
-        //   button2: "No",
-        // }
+        data: {
+          text: `Do you want to log out?`,
+          button1: 'Yes',
+          button2: 'No',
+        },
       },
       result => {
         if (result) {
