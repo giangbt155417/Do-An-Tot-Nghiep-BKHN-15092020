@@ -23,6 +23,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ProjectManagementComponent } from './modules/project-management/project-management.component';
 import { FormsModule } from '@angular/forms';
 import { DialogProjectDetailComponent } from './layouts/dialog/dialog-project-detail/dialog-project-detail.component';
+import { DialogRouteDetailComponent } from './layouts/dialog/dialog-route-detail/dialog-route-detail.component';
+import { DialogBusStopDetailComponent } from './layouts/dialog/dialog-bus-stop-detail/dialog-bus-stop-detail.component';
 
 @NgModule({
   imports: [
@@ -46,12 +48,20 @@ import { DialogProjectDetailComponent } from './layouts/dialog/dialog-project-de
     LcdContentEditorComponent,
     NearbyPlacesManagementComponent,
     BusStopListManagementComponent,
+    ProjectManagementComponent,
     DialogConfirmComponent,
     DialogMessageComponent,
-    ProjectManagementComponent,
     DialogProjectDetailComponent,
+    DialogRouteDetailComponent,
+    DialogBusStopDetailComponent,
   ],
-  entryComponents: [DialogConfirmComponent, DialogMessageComponent, DialogProjectDetailComponent],
+  entryComponents: [
+    DialogConfirmComponent,
+    DialogMessageComponent,
+    DialogProjectDetailComponent,
+    DialogRouteDetailComponent,
+    DialogBusStopDetailComponent,
+  ],
   bootstrap: [MainComponent],
 })
 export class GatewayAppModule {}
