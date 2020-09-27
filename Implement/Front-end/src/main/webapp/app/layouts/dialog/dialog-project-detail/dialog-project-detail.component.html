@@ -13,7 +13,28 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="lable-confirm"></label>
+                    <label class="label-confirm" style="width: 100%;">Project Name</label>
+                    <div>
+                        <input type="text" placeholder="Project Name" [ngModel]="project.name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label-confirm" style="width: 100%;">Owner</label>
+                    <div>
+                        <input type="text" [ngModel]="project.owner">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label-confirm" style="width: 100%;">Expiry date</label>
+                    <div>
+                        <input placeholder="DD/MM/YYYY" class="textbox-n" type="text" onfocus="(this.type='date')" id="date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label-confirm" style="width: 100%;">Description</label>
+                    <div>
+                        <textarea placeholder="Description" [ngModel]="project.description" rows="4" cols="50"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

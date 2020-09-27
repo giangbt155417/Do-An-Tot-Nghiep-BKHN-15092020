@@ -6,3 +6,51 @@
   width: 400px;
   margin: auto;
 }
+
+.modal-header h4 {
+  font-weight: bold;
+}
+
+.modal-header a {
+  padding-left: 238px;
+}
+
+.form-group label {
+  font-weight: unset;
+  width: 30%;
+}
+
+input {
+  width: 100%;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: capitalize;
+  color: #595959;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid #6d54fc;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: Roboto;
+}
+
+textarea {
+  width: 100%;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: capitalize;
+  color: #595959;
+  background: #ffffff;
+  border: 1px solid #6d54fc;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: Roboto;
+  resize: none;
+}
+
+.form-group input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: initial;
+  background: #ddd;
+}

@@ -29,7 +29,21 @@ export class ProjectManagementComponent implements OnInit {
     });
   }
 
-  public editProject() {}
+  public editProject() {
+    this.dialogService.showDialog(
+      DialogProjectDetailComponent,
+      {
+        data: {
+          title: 'Edit Project',
+          project: this.projectSelected,
+        },
+      },
+      (result: any) => {
+        if (result) {
+        }
+      }
+    );
+  }
 
   public deleteProject() {}
 

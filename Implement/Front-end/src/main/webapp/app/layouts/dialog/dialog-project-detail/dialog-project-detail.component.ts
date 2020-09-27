@@ -1,3 +1,4 @@
+import { Project } from './../../../entities/project';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -7,11 +8,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./dialog-project-detail.component.scss'],
 })
 export class DialogProjectDetailComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<DialogProjectDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+  project: Project;
+  constructor(public dialogRef: MatDialogRef<DialogProjectDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    this.project = data.project;
+  }
 
   ngOnInit(): void {}
 }
 
 export interface DialogData {
   title: string;
+  project: Project;
 }
