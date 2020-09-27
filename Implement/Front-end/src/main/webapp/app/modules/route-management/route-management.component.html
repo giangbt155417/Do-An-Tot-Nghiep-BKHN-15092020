@@ -16,9 +16,9 @@
         </div>
     </div>
     <div class="body-screen">
-        <div class="route-list">
-            <div class="link-back">
-                <a href="javascript:void(0)">
+        <div class="route-list" [ngStyle]="{'padding-top': isViewBusStop? '8px':'34px'}">
+            <div class="link-back" *ngIf="isViewBusStop">
+                <a href="javascript:void(0)" (click)="backToRouteList()">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                             width="24" height="24" viewBox="3 1 24 24">
@@ -28,7 +28,7 @@
                     <span class="text-span">Back</span>
                 </a>
             </div>
-            <div class="table-grid">
+            <div class="table-grid" *ngIf="!isViewBusStop">
                 <div class="table-head">
                     <div class="table-row">
                         <div class="table-col w-150">ID</div>
@@ -38,40 +38,35 @@
                     </div>
                 </div>
                 <div class="table-body">
-                    <div class="table-row">
-                        <div class="table-col w-150">001-00001</div>
-                        <div class="table-col w-100">01</div>
-                        <div class="table-col w-100">01</div>
-                        <div class="table-col">Hà Nội - Hải Phòng</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-col w-150">002-00002</div>
-                        <div class="table-col w-100">02</div>
-                        <div class="table-col w-100">02</div>
-                        <div class="table-col">Hà Nội - Hải Phòng</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-col w-150">003-00003</div>
-                        <div class="table-col w-100">03</div>
-                        <div class="table-col w-100">03</div>
-                        <div class="table-col">Hà Nội - Hải Phòng</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-col w-150">004-00004</div>
-                        <div class="table-col w-100">01</div>
-                        <div class="table-col w-100">01</div>
-                        <div class="table-col">Hà Nội - Hải Phòng</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-col w-150">005-00005</div>
-                        <div class="table-col w-100">05</div>
-                        <div class="table-col w-100">05</div>
-                        <div class="table-col">Hà Nội - Hải Phòng</div>
+                    <div class="table-row" [ngClass]="{'active': routeSelected === route}"
+                        *ngFor="let route of routesView" (click)="selectRoute(route)">
+                        <div class="table-col w-150">{{route.ID}}</div>
+                        <div class="table-col w-100">{{route.routeNo}}</div>
+                        <div class="table-col w-100">{{route.suffix}}</div>
+                        <div class="table-col">{{route.name}}</div>
                     </div>
                 </div>
             </div>
-            <div class="paging">
+            <div class="table-grid" *ngIf="isViewBusStop">
+                <div class="table-head">
+                    <div class="table-row">
+                        <div class="table-col w-150">ID</div>
+                        <div class="table-col w-100">Bus Stop No</div>
+                        <div class="table-col w-100">Suffix</div>
+                        <div class="table-col">Bus Stop Name</div>
+                    </div>
+                </div>
+                <div class="table-body">
+                    <div class="table-row">
+                        <div class="table-col w-150"></div>
+                        <div class="table-col w-100"></div>
+                        <div class="table-col w-100"></div>
+                        <div class="table-col"></div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="paging">
             </div>
         </div>
         <div style="width: 2%;"></div>
@@ -93,7 +88,7 @@
                         <a href="javascript:void(0)" (click)="createRoute()"><span>Create Route</span></a>
                     </div>
                     <div class="action-item">
-                        <span>
+                        <span [ngStyle]="{'opacity':routeSelected == undefined ? '0.5' : '1'}">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 version="1.1" width="24" height="24" viewBox="0 1 24 24">
                                 <path
@@ -101,10 +96,11 @@
                                     fill="#595959" />
                             </svg>
                         </span>
-                        <a href="javascript:void(0)" (click)="editRoute()"><span>Edit Route</span></a>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': routeSelected == undefined}"
+                            (click)="editRoute()"><span>Edit Route</span></a>
                     </div>
                     <div class="action-item">
-                        <span>
+                        <span [ngStyle]="{'opacity':routeSelected == undefined ? '0.5' : '1'}">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 version="1.1" width="24" height="24" viewBox="0 1 24 24">
                                 <path
@@ -112,10 +108,11 @@
                                     fill="#595959" />
                             </svg>
                         </span>
-                        <a href="javascript:void(0)" (click)="deleteRoute()"><span>Delete Route</span></a>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': routeSelected == undefined}"
+                            (click)="deleteRoute()"><span>Delete Route</span></a>
                     </div>
                     <div class="action-item">
-                        <span>
+                        <span [ngStyle]="{'opacity':routeSelected == undefined ? '0.5' : '1'}">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 version="1.1" width="24" height="24" viewBox="0 0 24 24">
                                 <path
@@ -123,7 +120,9 @@
                                     fill="#595959" />
                             </svg>
                         </span>
-                        <a href="javascript:void(0)" (click)="deleteRoute()"><span>Go To List Bus Stop of Route</span></a>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': routeSelected == undefined}"
+                            (click)="viewBusStopOfRoute()"><span>View Bus Stop of
+                                Route</span></a>
                     </div>
                 </div>
             </div>

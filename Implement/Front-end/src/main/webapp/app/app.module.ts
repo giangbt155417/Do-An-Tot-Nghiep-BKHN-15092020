@@ -22,6 +22,7 @@ import { DialogMessageComponent } from './layouts/dialog/dialog-message/dialog-m
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProjectManagementComponent } from './modules/project-management/project-management.component';
 import { FormsModule } from '@angular/forms';
+import { DialogProjectDetailComponent } from './layouts/dialog/dialog-project-detail/dialog-project-detail.component';
 
 @NgModule({
   imports: [
@@ -48,8 +49,9 @@ import { FormsModule } from '@angular/forms';
     DialogConfirmComponent,
     DialogMessageComponent,
     ProjectManagementComponent,
+    DialogProjectDetailComponent,
   ],
-  entryComponents: [DialogConfirmComponent, DialogMessageComponent],
+  entryComponents: [DialogConfirmComponent, DialogMessageComponent, DialogProjectDetailComponent],
   bootstrap: [MainComponent],
 })
 export class GatewayAppModule {}

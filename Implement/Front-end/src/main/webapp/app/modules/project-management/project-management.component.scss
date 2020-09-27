@@ -70,10 +70,15 @@ input {
   box-sizing: border-box;
   margin: 12px;
   padding: 10px;
+  user-select: none;
 }
 
-.line-break {
-  width: 100%;
+.project-list .list .item-list:hover:not(.active) {
+  background: #e6f1d8;
+}
+
+.project-list .list .item-list.active {
+  background: #afd788;
 }
 
 .project-name-text {

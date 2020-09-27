@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./media-management.component.scss'],
 })
 export class MediaManagementComponent implements OnInit {
+  isNoData: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {}

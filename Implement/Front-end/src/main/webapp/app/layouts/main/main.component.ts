@@ -51,6 +51,8 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   userName: string = '';
 
+  componentSelected: any;
+
   constructor(
     private accountService: AccountService,
     private titleService: Title,
@@ -118,7 +120,8 @@ export class MainComponent implements OnInit, AfterViewInit {
     if (this.componentRef) {
       this.componentRef.destroy();
     }
-    const factory = this.componentFactoryResolver.resolveComponentFactory(component);
+    this.componentSelected = component;
+    const factory = this.componentFactoryResolver.resolveComponentFactory(this.componentSelected);
     this.moduleLayout.clear();
     this.componentRef = this.moduleLayout.createComponent(factory);
     this.changeDetectorRef.detectChanges();

@@ -1,0 +1,18 @@
+::ng-deep .mat-dialog-container {
+  padding: 0 !important;
+}
+
+.modal-dialog-message {
+  width: 400px;
+  margin: auto;
+}
+
+.btn-primary:focus {
+  outline: none;
+}
+
+.label-message {
+  width: 370px;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}

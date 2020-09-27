@@ -3,6 +3,7 @@ $color-text-small: #8c8c8c;
 $color-text-normal: #595959;
 $color-border: #dde0e7;
 $color-main: #ece8ff;
+$color-button: #6d54fc;
 
 button {
   background: #c8c8c8;
@@ -17,11 +18,13 @@ label {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
-a:disabled {
+a.disabled {
   opacity: 0.5;
+  pointer-events: none;
+  cursor: default;
 }
 
 ul {
@@ -90,8 +93,7 @@ ul {
   border-left: 5px solid #6d54fc;
 }
 
-.nav-bar li a:focus,
-.nav-bar li a:active {
+.nav-bar li a.actived {
   opacity: 1;
   border-left: 5px solid #6d54fc;
 }
@@ -188,14 +190,18 @@ ul {
 }
 
 .modal-header {
-  background: #a1cdff;
+  // background: #a1cdff;
+  background: #fff;
   border-radius: 6px 6px 0 0;
 }
 
 .modal-header h4 {
-  color: #000;
-  font-size: 16px !important;
-  font-weight: bold;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  color: #262626;
 }
 
 .modal-dialog-centered {
@@ -212,10 +218,15 @@ ul {
   flex-direction: column;
   width: 100%;
   background-color: #fff;
+  border: 1px solid #e8eaef;
+  box-sizing: border-box;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  font-family: Roboto;
 }
 
-.modal-header button.close {
-  margin-top: 3px;
+.modal-header a {
+  padding-left: 244px;
 }
 
 .modal-body,
@@ -247,6 +258,10 @@ ul {
 
 .modal-content .modal-body {
   padding-bottom: 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  color: #262626;
 }
 
 .modal-content .input-item {
@@ -266,6 +281,32 @@ ul {
 .modal-footer .link-forget a {
   color: #262626;
   font-size: 9px;
+}
+
+.btn.btn-save {
+  width: 128px;
+  height: 36px;
+  background: $color-button;
+  color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+.btn.btn-close {
+  width: 128px;
+  height: 36px;
+  background: #bfbfbf;
+  color: #595959;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+.btn:hover {
+  filter: brightness(90%);
 }
 
 // Table
@@ -296,7 +337,7 @@ ul {
 }
 
 .table-head .table-col {
-  background: #fff;
+  background: #f1f3f5;
   position: sticky;
   top: 0;
   z-index: 99;
@@ -314,5 +355,9 @@ ul {
 }
 
 .table-grid .table-body .table-row:hover {
-  background: #f1f3f5;
+  background: #e6f1d8;
+}
+
+.table-grid .table-body .table-row.active {
+  background: #afd788;
 }

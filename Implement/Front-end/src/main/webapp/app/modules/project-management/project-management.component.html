@@ -4,24 +4,6 @@
             <label style="font-size: 16px; font-weight: 500; font-family: Roboto;">Project Management</label>
         </div>
         <div style="width: calc(100% - 330px)"></div>
-        <!-- <div>
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                    width="18" height="18" viewBox="0 0 24 24">
-                    <path
-                        d="M3 11H11V3H3M5 5H9V9H5M13 21H21V13H13M15 15H19V19H15M3 21H11V13H3M5 15H9V19H5M13 3V11H21V3M19 9H15V5H19Z" />
-                </svg>
-            </span>
-        </div>
-        <div>
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                    width="24" height="24" viewBox="0 0 24 24">
-                    <path
-                        d="M3 5V19H20V5H3M7 7V9H5V7H7M5 13V11H7V13H5M5 15H7V17H5V15M18 17H9V15H18V17M18 13H9V11H18V13M18 9H9V7H18V9Z" />
-                </svg>
-            </span>
-        </div> -->
         <div class="input-search">
             <span>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +37,8 @@
                 </span>
             </div>
             <div class="list">
-                <div class="item-list">
+                <div class="item-list" [ngClass]="{'active': projectSelected === project}"
+                    *ngFor="let project of projectsView" (click)="selectProject(project)">
                     <div style="padding-bottom: 16px;">
                         <span>
                             <svg width="40" height="40" viewBox="4 0 40 40" fill="none"
@@ -66,140 +49,14 @@
                             </svg>
                         </span>
                     </div>
-                    <p class="project-name-text">Project Name</p>
+                    <p class="project-name-text">{{project.name}}</p>
                     <div class="item-list-detail">
-                        <label style="width: 76px;">Owner: </label>
-                        <p>Giang BT</p>
-                    </div>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Timeline: </label>
-                        <p>2020/09/25+7:00</p>
-                    </div>
-                </div>
-                <div class="item-list">
-                    <div style="padding-bottom: 16px;">
-                        <span>
-                            <svg width="40" height="40" viewBox="4 0 40 40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M31.6667 11.567H20.8817C20.6098 11.567 20.3421 11.5004 20.1018 11.3732C19.8616 11.2459 19.6561 11.0619 19.5033 10.837L17.1617 7.39533C17.0089 7.171 16.8036 6.98739 16.5636 6.86046C16.3237 6.73353 16.0564 6.66712 15.785 6.66699H8.33333C7.44928 6.66699 6.60143 7.01818 5.97631 7.6433C5.35119 8.26842 5 9.11627 5 10.0003V30.0003C5 30.8844 5.35119 31.7322 5.97631 32.3573C6.60143 32.9825 7.44928 33.3337 8.33333 33.3337H31.6667C32.5507 33.3337 33.3986 32.9825 34.0237 32.3573C34.6488 31.7322 35 30.8844 35 30.0003V14.9003C35 14.0163 34.6488 13.1684 34.0237 12.5433C33.3986 11.9182 32.5507 11.567 31.6667 11.567Z"
-                                    fill="#6D54FC" />
-                            </svg>
-                        </span>
-                    </div>
-                    <p class="project-name-text">Project Name</p>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Owner: </label>
-                        <p>Giang BT</p>
+                        <label style="width: 100px;">Owner: </label>
+                        <p>{{project.owner}}</p>
                     </div>
                     <div class="item-list-detail">
-                        <label style="width: 76px;">Timeline: </label>
-                        <p>2020/09/25+7:00</p>
-                    </div>
-                </div>
-                <div class="item-list">
-                    <div style="padding-bottom: 16px;">
-                        <span>
-                            <svg width="40" height="40" viewBox="4 0 40 40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M31.6667 11.567H20.8817C20.6098 11.567 20.3421 11.5004 20.1018 11.3732C19.8616 11.2459 19.6561 11.0619 19.5033 10.837L17.1617 7.39533C17.0089 7.171 16.8036 6.98739 16.5636 6.86046C16.3237 6.73353 16.0564 6.66712 15.785 6.66699H8.33333C7.44928 6.66699 6.60143 7.01818 5.97631 7.6433C5.35119 8.26842 5 9.11627 5 10.0003V30.0003C5 30.8844 5.35119 31.7322 5.97631 32.3573C6.60143 32.9825 7.44928 33.3337 8.33333 33.3337H31.6667C32.5507 33.3337 33.3986 32.9825 34.0237 32.3573C34.6488 31.7322 35 30.8844 35 30.0003V14.9003C35 14.0163 34.6488 13.1684 34.0237 12.5433C33.3986 11.9182 32.5507 11.567 31.6667 11.567Z"
-                                    fill="#6D54FC" />
-                            </svg>
-                        </span>
-                    </div>
-                    <p class="project-name-text">Project Name</p>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Owner: </label>
-                        <p>Giang BT</p>
-                    </div>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Timeline: </label>
-                        <p>2020/09/25+7:00</p>
-                    </div>
-                </div>
-                <div class="item-list">
-                    <div style="padding-bottom: 16px;">
-                        <span>
-                            <svg width="40" height="40" viewBox="4 0 40 40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M31.6667 11.567H20.8817C20.6098 11.567 20.3421 11.5004 20.1018 11.3732C19.8616 11.2459 19.6561 11.0619 19.5033 10.837L17.1617 7.39533C17.0089 7.171 16.8036 6.98739 16.5636 6.86046C16.3237 6.73353 16.0564 6.66712 15.785 6.66699H8.33333C7.44928 6.66699 6.60143 7.01818 5.97631 7.6433C5.35119 8.26842 5 9.11627 5 10.0003V30.0003C5 30.8844 5.35119 31.7322 5.97631 32.3573C6.60143 32.9825 7.44928 33.3337 8.33333 33.3337H31.6667C32.5507 33.3337 33.3986 32.9825 34.0237 32.3573C34.6488 31.7322 35 30.8844 35 30.0003V14.9003C35 14.0163 34.6488 13.1684 34.0237 12.5433C33.3986 11.9182 32.5507 11.567 31.6667 11.567Z"
-                                    fill="#6D54FC" />
-                            </svg>
-                        </span>
-                    </div>
-                    <p class="project-name-text">Project Name</p>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Owner: </label>
-                        <p>Giang BT</p>
-                    </div>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Timeline: </label>
-                        <p>2020/09/25+7:00</p>
-                    </div>
-                </div>
-                <div class="item-list">
-                    <div style="padding-bottom: 16px;">
-                        <span>
-                            <svg width="40" height="40" viewBox="4 0 40 40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M31.6667 11.567H20.8817C20.6098 11.567 20.3421 11.5004 20.1018 11.3732C19.8616 11.2459 19.6561 11.0619 19.5033 10.837L17.1617 7.39533C17.0089 7.171 16.8036 6.98739 16.5636 6.86046C16.3237 6.73353 16.0564 6.66712 15.785 6.66699H8.33333C7.44928 6.66699 6.60143 7.01818 5.97631 7.6433C5.35119 8.26842 5 9.11627 5 10.0003V30.0003C5 30.8844 5.35119 31.7322 5.97631 32.3573C6.60143 32.9825 7.44928 33.3337 8.33333 33.3337H31.6667C32.5507 33.3337 33.3986 32.9825 34.0237 32.3573C34.6488 31.7322 35 30.8844 35 30.0003V14.9003C35 14.0163 34.6488 13.1684 34.0237 12.5433C33.3986 11.9182 32.5507 11.567 31.6667 11.567Z"
-                                    fill="#6D54FC" />
-                            </svg>
-                        </span>
-                    </div>
-                    <p class="project-name-text">Project Name</p>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Owner: </label>
-                        <p>Giang BT</p>
-                    </div>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Timeline: </label>
-                        <p>2020/09/25+7:00</p>
-                    </div>
-                </div>
-                <div class="item-list">
-                    <div style="padding-bottom: 16px;">
-                        <span>
-                            <svg width="40" height="40" viewBox="4 0 40 40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M31.6667 11.567H20.8817C20.6098 11.567 20.3421 11.5004 20.1018 11.3732C19.8616 11.2459 19.6561 11.0619 19.5033 10.837L17.1617 7.39533C17.0089 7.171 16.8036 6.98739 16.5636 6.86046C16.3237 6.73353 16.0564 6.66712 15.785 6.66699H8.33333C7.44928 6.66699 6.60143 7.01818 5.97631 7.6433C5.35119 8.26842 5 9.11627 5 10.0003V30.0003C5 30.8844 5.35119 31.7322 5.97631 32.3573C6.60143 32.9825 7.44928 33.3337 8.33333 33.3337H31.6667C32.5507 33.3337 33.3986 32.9825 34.0237 32.3573C34.6488 31.7322 35 30.8844 35 30.0003V14.9003C35 14.0163 34.6488 13.1684 34.0237 12.5433C33.3986 11.9182 32.5507 11.567 31.6667 11.567Z"
-                                    fill="#6D54FC" />
-                            </svg>
-                        </span>
-                    </div>
-                    <p class="project-name-text">Project Name</p>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Owner: </label>
-                        <p>Giang BT</p>
-                    </div>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Timeline: </label>
-                        <p>2020/09/25+7:00</p>
-                    </div>
-                </div>
-                <div class="item-list">
-                    <div style="padding-bottom: 16px;">
-                        <span>
-                            <svg width="40" height="40" viewBox="4 0 40 40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M31.6667 11.567H20.8817C20.6098 11.567 20.3421 11.5004 20.1018 11.3732C19.8616 11.2459 19.6561 11.0619 19.5033 10.837L17.1617 7.39533C17.0089 7.171 16.8036 6.98739 16.5636 6.86046C16.3237 6.73353 16.0564 6.66712 15.785 6.66699H8.33333C7.44928 6.66699 6.60143 7.01818 5.97631 7.6433C5.35119 8.26842 5 9.11627 5 10.0003V30.0003C5 30.8844 5.35119 31.7322 5.97631 32.3573C6.60143 32.9825 7.44928 33.3337 8.33333 33.3337H31.6667C32.5507 33.3337 33.3986 32.9825 34.0237 32.3573C34.6488 31.7322 35 30.8844 35 30.0003V14.9003C35 14.0163 34.6488 13.1684 34.0237 12.5433C33.3986 11.9182 32.5507 11.567 31.6667 11.567Z"
-                                    fill="#6D54FC" />
-                            </svg>
-                        </span>
-                    </div>
-                    <p class="project-name-text">Project Name</p>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Owner: </label>
-                        <p>Giang BT</p>
-                    </div>
-                    <div class="item-list-detail">
-                        <label style="width: 76px;">Timeline: </label>
-                        <p>2020/09/25+7:00</p>
+                        <label style="width: 100px;">Created Date: </label>
+                        <p>{{project.createdDate}}</p>
                     </div>
                 </div>
             </div>
@@ -223,7 +80,7 @@
                         <a href="javascript:void(0)" (click)="createProject()"><span>Create Project</span></a>
                     </div>
                     <div class="action-item">
-                        <span>
+                        <span [ngStyle]="{'opacity':projectSelected == undefined ? '0.5' : '1'}">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 version="1.1" width="24" height="24" viewBox="0 1 24 24">
                                 <path
@@ -231,10 +88,11 @@
                                     fill="#595959" />
                             </svg>
                         </span>
-                        <a href="javascript:void(0)" (click)="editProject()"><span>Edit Project</span></a>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': projectSelected == undefined}"
+                            (click)="editProject()"><span>Edit Project</span></a>
                     </div>
                     <div class="action-item">
-                        <span>
+                        <span [ngStyle]="{'opacity':projectSelected == undefined ? '0.5' : '1'}">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 version="1.1" width="24" height="24" viewBox="0 1 24 24">
                                 <path
@@ -242,7 +100,8 @@
                                     fill="#595959" />
                             </svg>
                         </span>
-                        <a href="javascript:void(0)" (click)="deleteProject()"><span>Delete Project</span></a>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': projectSelected == undefined}"
+                            (click)="deleteProject()"><span>Delete Project</span></a>
                     </div>
                 </div>
             </div>
