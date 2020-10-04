@@ -65,13 +65,12 @@
                     </div>
                 </div>
             </div>
-
             <div class="paging">
             </div>
         </div>
         <div style="width: 2%;"></div>
         <div class="route-list-action">
-            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 35.5%;">
+            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 42%;">
                 <div class="title">
                     <label>Actions</label>
                 </div>
@@ -124,10 +123,22 @@
                             (click)="viewBusStopOfRoute()"><span>View Bus Stop of
                                 Route</span></a>
                     </div>
+                    <div class="action-item">
+                        <span [ngStyle]="{'opacity':routeSelected == undefined ? '0.5' : '1'}">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="20" viewBox="0 0 24 24">
+                                <path
+                                    d="M7,15L11.5,9L15,13.5L17.5,10.5L21,15M22,4H14L12,2H6A2,2 0 0,0 4,4V16A2,2 0 0,0 6,18H22A2,2 0 0,0 24,16V6A2,2 0 0,0 22,4M2,6H0V11H0V20A2,2 0 0,0 2,22H20V20H2V6Z"
+                                    fill="#595959" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': routeSelected == undefined}"
+                            (click)="viewLCDPreviewOfRoute()"><span>Go to LCD Preview of Route</span></a>
+                    </div>
                 </div>
             </div>
             <div style="height: 2%;"></div>
-            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 62.5%;">
+            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 56%;">
                 <div class="title">Detail Selected Route</div>
             </div>
         </div>

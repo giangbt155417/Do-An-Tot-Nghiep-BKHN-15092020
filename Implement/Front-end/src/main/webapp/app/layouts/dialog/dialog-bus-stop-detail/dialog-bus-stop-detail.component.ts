@@ -8,12 +8,11 @@ import { Component, OnInit, Inject } from '@angular/core';
   styleUrls: ['./dialog-bus-stop-detail.component.scss'],
 })
 export class DialogBusStopDetailComponent implements OnInit {
-  busStop: BusStop;
-  constructor(public dialogRef: MatDialogRef<DialogBusStopDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-    this.busStop = data.busStop;
-  }
+  constructor(public dialogRef: MatDialogRef<DialogBusStopDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   ngOnInit(): void {}
+
+  save() {}
 }
 
 export interface DialogData {

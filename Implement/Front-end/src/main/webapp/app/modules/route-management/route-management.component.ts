@@ -35,6 +35,8 @@ export class RouteManagementComponent implements OnInit {
     this.isViewBusStop = true;
   }
 
+  public viewLCDPreviewOfRoute() {}
+
   public backToRouteList() {
     this.isViewBusStop = false;
   }
