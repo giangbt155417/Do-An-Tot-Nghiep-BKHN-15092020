@@ -7,6 +7,14 @@
   margin: auto;
 }
 
+.modal-header h4 {
+  font-weight: bold;
+}
+
+.modal-header a {
+  padding-left: 238px;
+}
+
 .btn-primary:focus {
   outline: none;
 }
@@ -15,4 +23,8 @@
   width: 370px;
   overflow: hidden !important;
   text-overflow: ellipsis;
+}
+
+.form-group label {
+  font-weight: 500;
 }

@@ -1,1 +1,40 @@
-<p>dialog-route-detail works!</p>
+<div class="modal show">
+    <div class="modal-dialog-route-detail modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+                <h4 class="modal-title pull-left">{{data.title}}</h4>
+                <a href="javascript:void(0)" mat-dialog-close>
+                    <svg width="16" height="16" viewBox="0 2 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M9.15256 8.00019L14.4266 2.72604C14.5023 2.65049 14.5624 2.56074 14.6034 2.46193C14.6444 2.36312 14.6655 2.25719 14.6655 2.15021C14.6655 2.04323 14.6444 1.9373 14.6034 1.83849C14.5624 1.73968 14.5023 1.64993 14.4266 1.57438C14.3512 1.49856 14.2615 1.4384 14.1627 1.39735C14.064 1.3563 13.9581 1.33516 13.8512 1.33516C13.7442 1.33516 13.6383 1.3563 13.5396 1.39735C13.4409 1.4384 13.3512 1.49856 13.2758 1.57438L7.99926 6.84686L2.72274 1.57271C2.64732 1.4969 2.55766 1.43674 2.45891 1.39568C2.36017 1.35463 2.25428 1.3335 2.14734 1.3335C2.0404 1.3335 1.93452 1.35463 1.83577 1.39568C1.73702 1.43674 1.64736 1.4969 1.57194 1.57271C1.4962 1.64826 1.43611 1.73802 1.39511 1.83683C1.35411 1.93564 1.33301 2.04156 1.33301 2.14854C1.33301 2.25552 1.35411 2.36145 1.39511 2.46026C1.43611 2.55907 1.4962 2.64882 1.57194 2.72438L6.84596 8.00019L1.57194 13.2752C1.4962 13.3507 1.43611 13.4405 1.39511 13.5393C1.35411 13.6381 1.33301 13.744 1.33301 13.851C1.33301 13.958 1.35411 14.0639 1.39511 14.1627C1.43611 14.2615 1.4962 14.3513 1.57194 14.4268C1.64725 14.5027 1.73681 14.563 1.83549 14.6042C1.93416 14.6454 2.04 14.6667 2.14693 14.6668C2.2539 14.6672 2.35988 14.6463 2.45872 14.6054C2.55757 14.5645 2.64731 14.5043 2.72274 14.4285L7.99926 9.15268L13.2758 14.4285C13.3512 14.5043 13.4409 14.5645 13.5398 14.6054C13.6386 14.6463 13.7446 14.6672 13.8516 14.6668C13.9586 14.6672 14.0645 14.6463 14.1634 14.6054C14.2622 14.5645 14.352 14.5043 14.4274 14.4285C14.5031 14.3529 14.5632 14.2632 14.6042 14.1644C14.6452 14.0656 14.6663 13.9596 14.6663 13.8527C14.6663 13.7457 14.6452 13.6398 14.6042 13.5409C14.5632 13.4421 14.5031 13.3524 14.4274 13.2768L9.15256 8.00019Z"
+                            fill="#8C8C8C" />
+                    </svg>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="label-confirm" style="width: 100%;">Route Name</label>
+                    <div>
+                        <input type="text" placeholder="Route Name" [ngModel]="route.name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label-confirm">Route No</label>
+                    <div>
+                        <input type="text" placeholder="Route No" [ngModel]="route.routeNo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label-confirm">Suffix</label>
+                    <div>
+                        <input type="text" placeholder="Suffix" [ngModel]="route.suffix">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-close" mat-dialog-close>Close</button>
+                <button type="button" class="btn btn-save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
