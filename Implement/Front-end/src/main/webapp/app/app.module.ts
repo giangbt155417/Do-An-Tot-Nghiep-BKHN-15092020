@@ -25,6 +25,9 @@ import { FormsModule } from '@angular/forms';
 import { DialogProjectDetailComponent } from './layouts/dialog/dialog-project-detail/dialog-project-detail.component';
 import { DialogRouteDetailComponent } from './layouts/dialog/dialog-route-detail/dialog-route-detail.component';
 import { DialogBusStopDetailComponent } from './layouts/dialog/dialog-bus-stop-detail/dialog-bus-stop-detail.component';
+import { DialogNearByDetailComponent } from './layouts/dialog/dialog-near-by-detail/dialog-near-by-detail.component';
+import { DialogFolderMediaComponent } from './layouts/dialog/dialog-folder-media/dialog-folder-media.component';
+import { DialogMediaComponent } from './layouts/dialog/dialog-media/dialog-media.component';
 
 @NgModule({
   imports: [
@@ -54,6 +57,9 @@ import { DialogBusStopDetailComponent } from './layouts/dialog/dialog-bus-stop-d
     DialogProjectDetailComponent,
     DialogRouteDetailComponent,
     DialogBusStopDetailComponent,
+    DialogNearByDetailComponent,
+    DialogFolderMediaComponent,
+    DialogMediaComponent,
   ],
   entryComponents: [
     DialogConfirmComponent,

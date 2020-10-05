@@ -1,1 +1,85 @@
-<p>nearby-places-management works!</p>
+<div class="nearby-places-list-screen">
+    <div class="header-screen">
+        <div>
+            <label style="font-size: 16px; font-weight: 500; font-family: Roboto;">Nearby Places Management</label>
+        </div>
+        <div style="width: calc(100% - 365px)"></div>
+        <div class="input-search">
+            <span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M3.23895 8.76823C3.23895 5.86787 5.59016 3.51666 8.49052 3.51666C11.3909 3.51666 13.7421 5.86787 13.7421 8.76823C13.7421 11.6686 11.3909 14.0198 8.49052 14.0198C5.59016 14.0198 3.23895 11.6686 3.23895 8.76823ZM8.49052 1.94434C4.72179 1.94434 1.66663 4.9995 1.66663 8.76823C1.66663 12.537 4.72179 15.5921 8.49052 15.5921C12.2593 15.5921 15.3144 12.537 15.3144 8.76823C15.3144 4.9995 12.2593 1.94434 8.49052 1.94434ZM15.0842 14.2501C14.7772 13.9431 14.2795 13.9431 13.9724 14.2501C13.6654 14.5571 13.6654 15.0549 13.9724 15.3619L16.9913 18.3807C17.2983 18.6878 17.7961 18.6878 18.1031 18.3807C18.4101 18.0737 18.4101 17.576 18.1031 17.2689L15.0842 14.2501Z"
+                        fill="#8C8C8C" />
+                </svg>
+            </span>
+            <input type="text" placeholder="Search...">
+        </div>
+    </div>
+    <div class="body-screen">
+        <div class="nearby-places-list" style="padding-top: 34px;">
+            <div class="table-grid">
+                <div class="table-head">
+                    <div class="table-row">
+                        <div class="table-col w-150">ID</div>
+                        <div class="table-col w-100">Name</div>
+                        <div class="table-col w-100">Media</div>
+                        <div class="table-col">Description</div>
+                    </div>
+                </div>
+                <div class="table-body">
+                    <div class="table-row" [ngClass]="{'active': nearbyPlaceSelected === place}" *ngFor="let place of nearbyPlacesView" (click)="selectNearbyPlace(place)">
+                        <div class="table-col w-150">{{place.id}}</div>
+                        <div class="table-col w-100">{{place.name}}</div>
+                        <div class="table-col w-100">{{place.picture}}</div>
+                        <div class="table-col">{{place.description}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="paging">
+            </div>
+        </div>
+        <div style="width: 2%;"></div>
+        <div class="nearby-places-list-action">
+            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 42%;">
+                <div class="title">
+                    <label>Actions</label>
+                </div>
+                <div class="action-list">
+                    <div class="action-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 1 24 24">
+                                <path
+                                    d="M10,4L12,6H20A2,2 0 0,1 22,8V18A2,2 0 0,1 20,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10M15,9V12H12V14H15V17H17V14H20V12H17V9H15Z"
+                                    fill="#595959" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)" (click)="createNearbyPlace()"><span>Create Nearby Place</span></a>
+                    </div>
+                    <div class="action-item">
+                        <span [ngStyle]="{'opacity':nearbyPlaceSelected == undefined ? '0.5' : '1'}">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 1 24 24">
+                                <path
+                                    d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+                                    fill="#595959" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': nearbyPlaceSelected == undefined}" (click)="editNearbyPlace()"><span>Edit Nearby Place</span></a>
+                    </div>
+                    <div class="action-item">
+                        <span [ngStyle]="{'opacity':nearbyPlaceSelected == undefined ? '0.5' : '1'}">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 1 24 24">
+                                <path
+                                    d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                                    fill="#595959" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': nearbyPlaceSelected == undefined}" (click)="deleteNearbyPlace()"><span>Delete Nearby Place</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

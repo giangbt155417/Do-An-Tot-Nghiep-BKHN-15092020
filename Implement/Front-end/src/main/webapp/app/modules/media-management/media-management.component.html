@@ -17,6 +17,17 @@
     </div>
     <div class="body-screen">
         <div class="media-folder-list">
+            <div class="link-back" *ngIf="isViewMediaList">
+                <a href="javascript:void(0)" (click)="backToFolderList()">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                            width="24" height="24" viewBox="3 1 24 24">
+                            <path d="M20,9V15H12V19.84L4.16,12L12,4.16V9H20Z" fill="#595959" />
+                        </svg>
+                    </span>
+                    <span class="text-span">Back</span>
+                </a>
+            </div>
             <div *ngIf="isNoData" class="no-data">
                 <span>
                     <svg width="69" height="63" viewBox="0 0 69 63" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,8 +47,8 @@
                     </svg>
                 </span>
             </div>
-            <div class="list">
-                <div class="item-list">
+            <div class="list" *ngIf="!isViewMediaList">
+                <div class="item-list" [ngClass]="{'active': folderSelected === folder}" *ngFor="let folder of foldersView" (click)="selectFolder(folder)" (dblclick)="viewMediaList()">
                     <div style="padding-bottom: 16px;">
                         <span>
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -48,15 +59,30 @@
                             </svg>
                         </span>
                     </div>
-                    <p class="media-folder-name-text">AAAA</p>
+                    <p class="media-folder-name-text">{{folder.name}}</p>
                     <div class="item-list-detail">
                         <label style="width: 100px;">Owner: </label>
-                        <p>BBBBB</p>
+                        <p>GiangBT</p>
                     </div>
                     <div class="item-list-detail">
                         <label style="width: 100px;">Created Date: </label>
-                        <p>CCCCC</p>
+                        <p>{{folder.createDate | date:'YYYY-MM-DD HH:mm'}}</p>
                     </div>
+                </div>
+            </div>
+            <div class="list" *ngIf="isViewMediaList">
+                <div class="folder-selected">
+                    <span style="padding-left: 20px; font-weight: bold;">{{folderSelected.name | uppercase}}</span>
+                </div>
+                <div style="margin-top: 20px;">
+                    <ul style="display: flex; align-items: center;flex-wrap: wrap;">
+                        <li class="li-media" *ngFor="let media of mediasOfFolder" (click)="selectMedia(media)">
+                            <a href="javascript:void(0)">
+                                <img [src]="media.url" alt="">
+                            </a>
+                            <span class="span-media">{{media.name}}</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -66,7 +92,7 @@
                 <div class="title">
                     <label>Actions</label>
                 </div>
-                <div class="action-list">
+                <div class="action-list" *ngIf="!isViewMediaList">
                     <div class="action-item">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -76,10 +102,10 @@
                                     fill="#595959" />
                             </svg>
                         </span>
-                        <a href="javascript:void(0)"><span>Create Media Folder</span></a>
+                        <a href="javascript:void(0)" (click)="createFolderMedia()"><span>Create Media Folder</span></a>
                     </div>
                     <div class="action-item">
-                        <span>
+                        <span [ngStyle]="{'opacity':folderSelected == undefined ? '0.5' : '1'}">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 version="1.1" width="24" height="24" viewBox="0 1 24 24">
                                 <path
@@ -87,10 +113,10 @@
                                     fill="#595959" />
                             </svg>
                         </span>
-                        <a href="javascript:void(0)"><span>Edit Media Folder</span></a>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': folderSelected == undefined}" (click)="editFolderMedia()"><span>Edit Media Folder</span></a>
                     </div>
                     <div class="action-item">
-                        <span>
+                        <span [ngStyle]="{'opacity':folderSelected == undefined ? '0.5' : '1'}">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 version="1.1" width="24" height="24" viewBox="0 1 24 24">
                                 <path
@@ -98,13 +124,44 @@
                                     fill="#595959" />
                             </svg>
                         </span>
-                        <a href="javascript:void(0)"><span>Delete Media Folder</span></a>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': folderSelected == undefined}" (click)="deleteFolderMedia()"><span>Delete Media Folder</span></a>
+                    </div>
+                </div>
+                <div class="action-list" *ngIf="isViewMediaList">
+                    <div class="action-item">
+                        <span>
+                            <!-- svg import -->
+                            <img src="../../../content/images/computing-cloud.svg" alt="" style="width: 20px;">
+                        </span>
+                        <a href="javascript:void(0)" (click)="importMedia()"><span>Import Media</span></a>
+                    </div>
+                    <div class="action-item">
+                        <span [ngStyle]="{'opacity':mediaSelected == undefined ? '0.5' : '1'}">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 1 24 24">
+                                <path
+                                    d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+                                    fill="#595959" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': mediaSelected == undefined}" (click)="editMedia()"><span>Edit Media</span></a>
+                    </div>
+                    <div class="action-item">
+                        <span [ngStyle]="{'opacity':mediaSelected == undefined ? '0.5' : '1'}">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 1 24 24">
+                                <path
+                                    d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                                    fill="#595959" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)" [ngClass]="{'disabled': mediaSelected == undefined}" (click)="deleteMedia()"><span>Delete Media</span></a>
                     </div>
                 </div>
             </div>
             <div style="height: 2%;"></div>
-            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 69.5%;">
-                <div class="title">Detail Selected Media Folder</div>
+            <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 69.5%;" *ngIf="mediaSelected">
+                <div class=" title ">Detail Selected Media</div>
             </div>
         </div>
     </div>

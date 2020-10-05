@@ -1,5 +1,5 @@
-import { IMedia } from './media';
+import { Media } from './media';
 
-export class VideoMedia implements IMedia {
-  constructor() {}
+export class VideoMedia extends Media {
+  // constructor() {}
 }
