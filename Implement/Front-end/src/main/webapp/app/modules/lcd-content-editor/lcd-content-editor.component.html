@@ -3,8 +3,8 @@
         <div>
             <label style="font-size: 16px; font-weight: 500; font-family: Roboto;">LCD Content Editor</label>
         </div>
-        <div style="width: calc(100% - 330px)"></div>
-        <div class="input-search">
+        <div style="width: calc(100% - 316px)"></div>
+        <div class="input-search" *ngIf="!isContentEditor">
             <span>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -50,14 +50,14 @@
                             </svg>
                         </span>
                     </div>
-                    <p class="lcd-editor-name-text"></p>
+                    <p class="lcd-editor-name-text">{{contentGroup.name}}</p>
                     <div class="item-list-detail">
                         <label style="width: 100px;">Owner: </label>
-                        <p></p>
+                        <p>{{contentGroup.owner}}</p>
                     </div>
                     <div class="item-list-detail">
                         <label style="width: 100px;">Created Date: </label>
-                        <p></p>
+                        <p>{{contentGroup.createdDate}}</p>
                     </div>
                 </div>
             </div>
@@ -78,43 +78,277 @@
                 <div class="content-group-info">
                     <div>
                         <label>Template Group:</label>
-                        <p>AAAAAAAA</p>
+                        <p>{{contentGroupSelected?.name}}</p>
                     </div>
                     <div>
                         <label>Width:</label>
-                        <p>1920 px</p>
+                        <p>{{contentGroupSelected?.width}}</p>
                     </div>
                     <div>
                         <label>Height:</label>
-                        <p>540 px</p>
+                        <p>{{contentGroupSelected?.height}}</p>
                     </div>
                 </div>
                 <div class="table-grid">
                     <div class="table-body">
-                        <div class="table-row" (click)="selectContent()" (dblclick)="goToContentEditor()">
-                            <div class="table-col">Normal</div>
-                        </div>
-                        <div class="table-row">
-                            <div class="table-col">Spring</div>
-                        </div>
-                        <div class="table-row">
-                            <div class="table-col">Summer</div>
-                        </div>
-                        <div class="table-row">
-                            <div class="table-col">Autumn</div>
-                        </div>
-                        <div class="table-row">
-                            <div class="table-col">Winter</div>
+                        <div class="table-row" *ngFor="let content of contentsView"
+                            [ngClass]="{'active': contentSelected === content}" (click)="selectContent(content)"
+                            (dblclick)="goToContentEditor(content)">
+                            <div class="table-col">{{content.name}}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div *ngIf="isContentEditor">
-
+        <div *ngIf="isContentEditor" class="lcd-content-editor">
+            <div class="main">
+                <div class="tools">
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.SELECT_AREA}"
+                        (click)="selectTools(ContentEditorTools.SELECT_AREA)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M13.64,21.97C13.14,22.21 12.54,22 12.31,21.5L10.13,16.76L7.62,18.78C7.45,18.92 7.24,19 7,19A1,1 0 0,1 6,18V3A1,1 0 0,1 7,2C7.24,2 7.47,2.09 7.64,2.23L7.65,2.22L19.14,11.86C19.57,12.22 19.62,12.85 19.27,13.27C19.12,13.45 18.91,13.57 18.7,13.61L15.54,14.23L17.74,18.96C18,19.46 17.76,20.05 17.26,20.28L13.64,21.97Z"
+                                    fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.DRAW_FIX_TEXT}"
+                        (click)="selectTools(ContentEditorTools.DRAW_FIX_TEXT)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M18.5,4L19.66,8.35L18.7,8.61C18.25,7.74 17.79,6.87 17.26,6.43C16.73,6 16.11,6 15.5,6H13V16.5C13,17 13,17.5 13.33,17.75C13.67,18 14.33,18 15,18V19H9V18C9.67,18 10.33,18 10.67,17.75C11,17.5 11,17 11,16.5V6H8.5C7.89,6 7.27,6 6.74,6.43C6.21,6.87 5.75,7.74 5.3,8.61L4.34,8.35L5.5,4H18.5Z"
+                                    fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.DRAW_LINK_TEXT}"
+                        (click)="selectTools(ContentEditorTools.DRAW_LINK_TEXT)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M2 4C2 2.9 2.9 2 4 2H8V4H4V8H2V4M22 20C22 21.11 21.11 22 20 22H16V20H20V16H22V20M4 22C2.9 22 2 21.11 2 20V16H4V20H8V22H4M20 2C21.11 2 22 2.9 22 4V8H20V4H16V2H20M9 7V9H11V17H13V9H15V7H9Z"
+                                    fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.DRAW_FIX_PICTURE}"
+                        (click)="selectTools(ContentEditorTools.DRAW_FIX_PICTURE)">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                            width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M21,3H3C2,3 1,4 1,5V19A2,2 0 0,0 3,21H21C22,21 23,20 23,19V5C23,4 22,3 21,3M5,17L8.5,12.5L11,15.5L14.5,11L19,17H5Z"
+                                fill="#595959" />
+                        </svg>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.DRAW_LINK_PICTURE}"
+                        (click)="selectTools(ContentEditorTools.DRAW_LINK_PICTURE)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M21,15H23V17H21V15M21,11H23V13H21V11M23,19H21V21C22,21 23,20 23,19M13,3H15V5H13V3M21,7H23V9H21V7M21,3V5H23C23,4 22,3 21,3M1,7H3V9H1V7M17,3H19V5H17V3M17,19H19V21H17V19M3,3C2,3 1,4 1,5H3V3M9,3H11V5H9V3M5,3H7V5H5V3M1,11V19A2,2 0 0,0 3,21H15V11H1M3,19L5.5,15.79L7.29,17.94L9.79,14.72L13,19H3Z"
+                                    fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.ZOOM_PAN}"
+                        (click)="selectTools(ContentEditorTools.ZOOM_PAN)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M9,2A7,7 0 0,1 16,9C16,10.57 15.5,12 14.61,13.19L15.41,14H16L22,20L20,22L14,16V15.41L13.19,14.61C12,15.5 10.57,16 9,16A7,7 0 0,1 2,9A7,7 0 0,1 9,2M8,5V8H5V10H8V13H10V10H13V8H10V5H8Z"
+                                    fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.HORIZONTAL_ALIGN_LEFT}"
+                        (click)="selectTools(ContentEditorTools.HORIZONTAL_ALIGN_LEFT)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M22 13V19H6V13H22M6 5V11H16V5H6M2 2V22H4V2H2" fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.HORIZONTAL_ALIGN_CENTER}"
+                        (click)="selectTools(ContentEditorTools.HORIZONTAL_ALIGN_CENTER)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M20 19H13V22H11V19H4V13H11V11H7V5H11V2H13V5H17V11H13V13H20V19Z"
+                                    fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.HORIZONTAL_ALIGN_RIGHT}"
+                        (click)="selectTools(ContentEditorTools.HORIZONTAL_ALIGN_RIGHT)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M18 13V19H2V13H18M8 5V11H18V5H8M20 2V22H22V2H20Z" fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.VERTICAL_ALIGN_TOP}"
+                        (click)="selectTools(ContentEditorTools.VERTICAL_ALIGN_TOP)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M11 22H5V6H11V22M19 6H13V16H19V6M22 2H2V4H22V2Z" fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.VERTICAL_ALIGN_CENTER}"
+                        (click)="selectTools(ContentEditorTools.VERTICAL_ALIGN_CENTER)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M5 20V13H2V11H5V4H11V11H13V7H19V11H22V13H19V17H13V13H11V20H5Z"
+                                    fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                    <button [ngClass]="{'actived': toolSelected === ContentEditorTools.VERTICAL_ALIGN_BOTTOM}"
+                        (click)="selectTools(ContentEditorTools.VERTICAL_ALIGN_BOTTOM)">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M11 18H5V2H11V18M19 8H13V18H19V8M22 20H2V22H22V20Z" fill="#595959" />
+                            </svg>
+                        </i>
+                    </button>
+                </div>
+                <div class="row-2-flex">
+                    <div class="preview">
+                        <div id="canvasContainer" #canvasContainer
+                            style="display: inline-block; position: relative; z-index: 1;">
+                        </div>
+                    </div>
+                    <div class="layer">
+                        <ul>
+                            <li>
+                                <a>
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20"
+                                            height="20" viewBox="0 1 24 24">
+                                            <path
+                                                d="M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z"
+                                                fill="#595959" />
+                                        </svg>
+                                    </i>
+                                </a>
+                                <a>
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20"
+                                            height="21" viewBox="0 2 24 24">
+                                            <path
+                                                d="M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"
+                                                fill="#595959" />
+                                        </svg>
+                                    </i>
+                                </a>
+                                <label>Area 1</label>
+                                <a>
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="23"
+                                            height="23" viewBox="0 1 24 24">
+                                            <path
+                                                d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
+                                                fill="#595959" />
+                                        </svg>
+                                    </i>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20"
+                                            height="20" viewBox="0 1 24 24">
+                                            <path
+                                                d="M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z"
+                                                fill="#595959" />
+                                        </svg>
+                                    </i>
+                                </a>
+                                <a>
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20"
+                                            height="21" viewBox="0 2 24 24">
+                                            <path
+                                                d="M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"
+                                                fill="#595959" />
+                                        </svg>
+                                    </i>
+                                </a>
+                                <label>Area 2</label>
+                                <a>
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="23"
+                                            height="23" viewBox="0 1 24 24">
+                                            <path
+                                                d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
+                                                fill="#595959" />
+                                        </svg>
+                                    </i>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20"
+                                            height="20" viewBox="0 1 24 24">
+                                            <path
+                                                d="M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z"
+                                                fill="#595959" />
+                                        </svg>
+                                    </i>
+                                </a>
+                                <a>
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20"
+                                            height="21" viewBox="0 2 24 24">
+                                            <path
+                                                d="M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"
+                                                fill="#595959" />
+                                        </svg>
+                                    </i>
+                                </a>
+                                <label>Area 3</label>
+                                <a>
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="23"
+                                            height="23" viewBox="0 1 24 24">
+                                            <path
+                                                d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
+                                                fill="#595959" />
+                                        </svg>
+                                    </i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-area">
+            </div>
         </div>
-        <div style="width: 2%;"></div>
-        <div class="lcd-editor-action">
+        <div *ngIf="!isContentEditor" style="width: 2%;"></div>
+        <div *ngIf="!isContentEditor" class="lcd-editor-action">
             <div style="border: 1px solid #dde0e7; border-radius: 6px; height: 28.5%;">
                 <div class="title">
                     <label>Actions</label>

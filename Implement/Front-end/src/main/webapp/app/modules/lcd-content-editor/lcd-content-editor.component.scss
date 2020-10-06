@@ -18,6 +18,8 @@ input {
 .lcd-editor-screen {
   padding-left: 10px;
   height: 100%;
+  min-width: 1800px;
+  overflow: auto;
 }
 
 .lcd-editor-screen .header-screen {
@@ -159,6 +161,67 @@ input {
   font-size: 14px;
   line-height: 16px;
   width: 122px;
+}
+
+.lcd-content-editor {
+  width: 100%;
+  display: flex;
+  padding-right: 10px;
+}
+
+.lcd-content-editor .main {
+  width: calc(100% - 300px);
+  background: #fff;
+}
+
+.lcd-content-editor .detail-area {
+  width: 300px;
+  background: $color-main;
+}
+
+.main .tools {
+  background-color: #f0f0f0;
+  width: 100%;
+  display: flex;
+}
+
+.tools button {
+  background: $color-main;
+  outline: none;
+  padding: 10px;
+  border-right: 1px solid #fff;
+}
+
+.tools button.actived {
+  filter: brightness(85%);
+}
+
+.main .row-2-flex {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 46px);
+}
+
+.main .row-2-flex .preview {
+  width: calc(100% - 270px);
+}
+
+.main .row-2-flex .layer {
+  width: 270px;
+  background: #fff;
+  border-left: 1px solid #f0f0f0;
+  padding: 2px;
+}
+
+.layer label {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: normal;
+  width: 186px;
+}
+
+.layer ul li {
+  border-bottom: 1px solid #595959;
 }
 
 p {
