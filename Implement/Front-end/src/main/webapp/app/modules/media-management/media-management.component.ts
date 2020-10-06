@@ -6,7 +6,7 @@ import { DialogService } from './../../services/dialog.service';
 import { MediaFolder } from './../../entities/media-folder';
 import { Component, OnInit } from '@angular/core';
 import { Media } from '../../entities/media';
-
+import * as S3 from 'aws-sdk/clients/s3';
 @Component({
   selector: 'app-media-management',
   templateUrl: './media-management.component.html',
@@ -100,7 +100,39 @@ export class MediaManagementComponent implements OnInit {
     this.isViewMediaList = false;
   }
 
-  importMedia() {}
+  importMedia() {
+    (document.getElementById('importedFile') as HTMLElement).click();
+  }
+
+  async upload(event: any) {
+    let selectedFiles = event.target.files;
+    if (!selectedFiles || selectedFiles.length <= 0) {
+      return;
+    }
+
+    let s3 = new S3({
+      accessKeyId: 'AKIAIOSFODNN7EXAMPLE',
+      secretAccessKey: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+      endpoint: 'http://localhost:9200',
+      s3ForcePathStyle: true, // needed with minio?
+      signatureVersion: 'v4',
+    });
+
+    let bucketName = 'media';
+    // name of folder
+    let folderName = this.folderSelected.name.toLowerCase().replace(' ', '');
+    // upload files
+    for (var file of selectedFiles) {
+      let keyName = folderName + '/' + file.name;
+      await s3
+        .putObject({ Bucket: bucketName, Key: keyName, Body: file }, (error, data) => {
+          if (!error) {
+            console.log(`${file.name} uploaded`);
+          }
+        })
+        .promise();
+    }
+  }
 
   selectMedia(media: Media) {
     this.mediaSelected = media;

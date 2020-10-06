@@ -135,6 +135,7 @@
                         </span>
                         <a href="javascript:void(0)" (click)="importMedia()"><span>Import Media</span></a>
                     </div>
+                    <input type="file" style="display: none;" id="importedFile" multiple (change)="upload($event)">
                     <div class="action-item">
                         <span [ngStyle]="{'opacity':mediaSelected == undefined ? '0.5' : '1'}">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
