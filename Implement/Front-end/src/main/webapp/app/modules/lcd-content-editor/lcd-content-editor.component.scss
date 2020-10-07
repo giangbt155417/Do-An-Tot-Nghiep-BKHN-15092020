@@ -3,7 +3,8 @@ $color-text-normal: #595959;
 $color-border: #dde0e7;
 $color-main: #ece8ff;
 
-input {
+input,
+select {
   height: 100%;
   width: 100%;
   background: #ffffff;
@@ -18,8 +19,8 @@ input {
 .lcd-editor-screen {
   padding-left: 10px;
   height: 100%;
-  min-width: 1800px;
-  overflow: auto;
+  // min-width: 1800px;
+  // overflow: auto;
 }
 
 .lcd-editor-screen .header-screen {
@@ -183,6 +184,7 @@ input {
   background-color: #f0f0f0;
   width: 100%;
   display: flex;
+  align-items: center;
 }
 
 .tools button {
@@ -224,8 +226,44 @@ input {
   border-bottom: 1px solid #595959;
 }
 
+.detail-area .header {
+  width: 100%;
+  height: 46px;
+  background-color: #f0f0f0;
+}
+
+.detail-area .body {
+}
+
+.detail-area .body label.title {
+  width: 100%;
+  border: 5px outset #fff;
+  background: royalblue;
+  padding: 6px;
+  text-align: start;
+}
+
+.detail-area .body label.w-56 {
+  width: 56px;
+}
+
+.detail-area .body label.w-200 {
+  width: 200px;
+}
+
+.detail-area .body .input-select-item {
+  width: calc(100% - 61px);
+  text-align: end;
+}
+
 p {
   margin: 0;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+label {
   font-family: Roboto;
   font-size: 14px;
   font-weight: normal;

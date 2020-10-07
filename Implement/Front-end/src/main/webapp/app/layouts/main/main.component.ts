@@ -1,4 +1,13 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ComponentFactoryResolver,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, NavigationEnd, NavigationError, Router } from '@angular/router';
 import { AccountService } from 'app/core/auth/account.service';
@@ -14,12 +23,13 @@ import { FIELD_COMPONENT } from '../../utils/constants';
 import { Subscription } from 'rxjs';
 import { DialogService } from '../../services/dialog.service';
 import { DialogConfirmComponent } from '../dialog/dialog-confirm/dialog-confirm.component';
+import { ActionService } from '../../services/action.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
 })
-export class MainComponent implements OnInit, AfterViewInit {
+export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * entryComponents
    */
@@ -33,7 +43,6 @@ export class MainComponent implements OnInit, AfterViewInit {
     LcdContentEditorComponent,
     BusStopListManagementComponent,
   ];
-
   /**
    * ElementRef moduleLayout
    */
@@ -42,25 +51,34 @@ export class MainComponent implements OnInit, AfterViewInit {
     static: true,
   })
   moduleLayout: any;
-
   componentRef: any;
-
   FIELD_COMPONENT = FIELD_COMPONENT;
-
   isHeader = false;
-
   userName: string = '';
-
   componentSelected: any;
-
+  isOpenedProject = false;
+  subscriptions: Array<Subscription> = new Array<Subscription>();
   constructor(
     private accountService: AccountService,
     private titleService: Title,
     private router: Router,
     private componentFactoryResolver: ComponentFactoryResolver,
     private changeDetectorRef: ChangeDetectorRef,
-    private dialogService: DialogService
-  ) {}
+    private dialogService: DialogService,
+    private actionService: ActionService
+  ) {
+    this.subscriptions.push(
+      actionService.actionUpdateState.subscribe((action: string) => {
+        if (action == '[Action] Open Project') {
+          this.isOpenedProject = true;
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
 
   ngOnInit(): void {
     // try to log in automatically
@@ -107,7 +125,10 @@ export class MainComponent implements OnInit, AfterViewInit {
     const sub: Subscription = this.componentRef.instance.loginSuccess.subscribe((username: any) => {
       this.userName = username;
       this.isHeader = true;
+      const factory = this.componentFactoryResolver.resolveComponentFactory(ProjectManagementComponent);
       this.moduleLayout.clear();
+      this.componentRef = this.moduleLayout.createComponent(factory);
+      this.componentSelected = this.entryComponents[FIELD_COMPONENT.ProjectManagementComponent];
       this.changeDetectorRef.detectChanges();
     });
     this.componentRef.onDestroy(() => {

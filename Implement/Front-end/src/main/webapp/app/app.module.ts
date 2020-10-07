@@ -28,6 +28,9 @@ import { DialogBusStopDetailComponent } from './layouts/dialog/dialog-bus-stop-d
 import { DialogNearByDetailComponent } from './layouts/dialog/dialog-near-by-detail/dialog-near-by-detail.component';
 import { DialogFolderMediaComponent } from './layouts/dialog/dialog-folder-media/dialog-folder-media.component';
 import { DialogMediaComponent } from './layouts/dialog/dialog-media/dialog-media.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AccessInterceptor } from '../app/blocks/interceptor/access.interceptor';
 
 @NgModule({
   imports: [
@@ -41,6 +44,8 @@ import { DialogMediaComponent } from './layouts/dialog/dialog-media/dialog-media
     // jhipster-needle-angular-add-module JHipster will add new module here
     GatewayAppRoutingModule,
     MatDialogModule,
+    NgxPaginationModule,
+    HttpClientModule,
   ],
   declarations: [
     MainComponent,
@@ -67,6 +72,16 @@ import { DialogMediaComponent } from './layouts/dialog/dialog-media/dialog-media
     DialogProjectDetailComponent,
     DialogRouteDetailComponent,
     DialogBusStopDetailComponent,
+    DialogNearByDetailComponent,
+    DialogFolderMediaComponent,
+    DialogMediaComponent,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AccessInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [MainComponent],
 })

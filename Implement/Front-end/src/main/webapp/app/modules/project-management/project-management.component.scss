@@ -59,6 +59,8 @@ input {
   display: flex;
   justify-content: start;
   flex-flow: row wrap;
+  max-height: calc(100% - 24px);
+  overflow: auto;
 }
 
 .project-list .list .item-list {

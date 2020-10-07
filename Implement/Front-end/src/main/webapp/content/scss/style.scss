@@ -33,6 +33,12 @@ ul {
   padding: 0;
 }
 
+select:focus {
+  outline: none;
+  box-shadow: initial;
+  background: #ddd;
+}
+
 .w-50 {
   width: 50px !important;
 }
@@ -57,7 +63,13 @@ ul {
   width: 300px !important;
 }
 
+.pad-4 {
+  padding: 4px;
+}
+
 .main-layout {
+  min-width: 1920px;
+  overflow: auto;
   background: #fff;
   height: 937px;
 }
@@ -146,13 +158,13 @@ ul {
 
 .setting {
   position: absolute;
-  right: 3.5%;
+  right: calc(100% - 1870px);
   top: 16px;
 }
 
 .logout {
   position: absolute;
-  right: 1%;
+  right: calc(100% - 1910px);
   top: 14px;
 }
 
@@ -360,4 +372,52 @@ ul {
 
 .table-grid .table-body .table-row.active {
   background: #afd788;
+}
+
+.custom-pagination {
+  display: inline-flex;
+}
+
+.paging {
+  display: flex;
+}
+
+.custom-pagination a {
+  background: #000;
+  color: #fff;
+  float: left;
+  padding: 4px 8px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  transition: background-color 0.4s;
+}
+
+.custom-pagination a:hover:not(.active) {
+  color: #fff;
+  background: #8b8b8b;
+}
+
+.custom-pagination div > span {
+  color: #fff;
+  float: left;
+  padding: 4px 8px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  transition: background-color 0.3s;
+  background: $background-color-header;
+}
+
+.custom-pagination div.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.loader {
+  border: 7px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 7px solid #3498db;
+  width: 29px;
+  height: 29px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
 }

@@ -1,10 +1,11 @@
 import { DialogConfirmComponent } from './../../layouts/dialog/dialog-confirm/dialog-confirm.component';
-import { activateRoute } from './../../account/activate/activate.route';
 import { DialogRouteDetailComponent } from './../../layouts/dialog/dialog-route-detail/dialog-route-detail.component';
 import { DialogService } from './../../services/dialog.service';
 import { Component, OnInit } from '@angular/core';
 import { BusStop } from 'app/entities/bus-stop';
 import { Route } from '../../entities/route';
+import { PaginationInstance } from 'ngx-pagination';
+import { Constants } from 'app/utils/constants';
 @Component({
   selector: 'app-route-management',
   templateUrl: './route-management.component.html',
@@ -14,6 +15,15 @@ export class RouteManagementComponent implements OnInit {
   routeSelected: any;
   routesView: Array<Route>;
   isViewBusStop: boolean = false;
+  loading: boolean = false;
+  pageFirst: number = 1;
+  totalRoutes: number = 20;
+  pagingConfig: PaginationInstance = {
+    id: 'advanced',
+    itemsPerPage: Constants.RECORDS_PER_PAGE,
+    currentPage: this.pageFirst,
+    totalItems: this.totalRoutes,
+  };
 
   constructor(private dialogService: DialogService) {
     this.routesView = new Array<Route>();
@@ -89,4 +99,6 @@ export class RouteManagementComponent implements OnInit {
   public backToRouteList() {
     this.isViewBusStop = false;
   }
+
+  public onPageChange(pageNumber: any) {}
 }

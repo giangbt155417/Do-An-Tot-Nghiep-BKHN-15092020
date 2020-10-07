@@ -1,4 +1,9 @@
-export class Constants {}
+export class Constants {
+  static readonly RECORDS_PER_PAGE = 10;
+  static readonly BACK_END_URL = 'http://localhost:8080/services/';
+  static readonly PROGRAM_SERVICE = 'program/';
+  static readonly MEDIA_SERVICE = 'media/';
+}
 
 export enum FIELD_COMPONENT {
   LoginModalComponent,

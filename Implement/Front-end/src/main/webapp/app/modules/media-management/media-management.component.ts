@@ -109,7 +109,6 @@ export class MediaManagementComponent implements OnInit {
     if (!selectedFiles || selectedFiles.length <= 0) {
       return;
     }
-
     let s3 = new S3({
       accessKeyId: 'AKIAIOSFODNN7EXAMPLE',
       secretAccessKey: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
