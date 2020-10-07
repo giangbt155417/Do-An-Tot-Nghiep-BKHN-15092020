@@ -11,19 +11,10 @@ export class Route {
   busStops?: Array<BusStop>;
   ID?: string;
 
-  constructor(
-    routeNo?: string,
-    name?: string,
-    suffix?: string,
-    projectId?: Number,
-    createdDate?: string,
-    description?: string,
-    busStops?: Array<BusStop>
-  ) {
+  constructor(routeNo?: string, name?: string, suffix?: string, createdDate?: string, description?: string, busStops?: Array<BusStop>) {
     this.routeNo = routeNo;
     this.name = name;
     this.suffix = suffix;
-    this.projectId = projectId;
     this.createdDate = createdDate;
     this.description = description;
     this.busStops = busStops;

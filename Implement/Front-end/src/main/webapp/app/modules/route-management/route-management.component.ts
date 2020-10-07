@@ -1,10 +1,9 @@
+import { PaginationInstance } from 'ngx-pagination';
 import { DialogConfirmComponent } from './../../layouts/dialog/dialog-confirm/dialog-confirm.component';
 import { DialogRouteDetailComponent } from './../../layouts/dialog/dialog-route-detail/dialog-route-detail.component';
 import { DialogService } from './../../services/dialog.service';
 import { Component, OnInit } from '@angular/core';
-import { BusStop } from 'app/entities/bus-stop';
 import { Route } from '../../entities/route';
-import { PaginationInstance } from 'ngx-pagination';
 import { Constants } from 'app/utils/constants';
 import { RouteManagementService } from 'app/services/route-management.service';
 
@@ -15,7 +14,7 @@ import { RouteManagementService } from 'app/services/route-management.service';
 })
 export class RouteManagementComponent implements OnInit {
   routeSelected: any;
-  routesView: Array<Route>;
+  routesView: Array<Route> = new Array<Route>();
   isViewBusStop: boolean = false;
   loading: boolean = false;
   pageFirst: number = 1;
@@ -27,62 +26,109 @@ export class RouteManagementComponent implements OnInit {
     totalItems: this.totalRoutes,
   };
 
-  constructor(private dialogService: DialogService, private routeManagementService: RouteManagementService) {
-    this.routesView = new Array<Route>();
-    for (let index = 0; index < 10; index++) {
-      let route = new Route('01', 'Hà Nội - Hải Phòng', '01', 1, '20200708', '', new Array<BusStop>());
-      this.routesView.push(route);
-    }
+  constructor(private dialogService: DialogService, private routeManagementService: RouteManagementService) {}
+
+  ngOnInit(): void {
+    this.fetchDataRoutes(this.pageFirst);
   }
 
-  ngOnInit(): void {}
+  private fetchDataRoutes(pageNumber: number, routeSelected?: Route) {
+    this.loading = true;
+    this.routeManagementService.countRoutesByProjectId(1).subscribe(totalRoutesData => {
+      this.totalRoutes = totalRoutesData;
+      this.pagingConfig.totalItems = this.totalRoutes;
+      this.routeManagementService.getRoutesByProjectId(1, pageNumber).subscribe(
+        routesData => {
+          this.routesView = routesData;
+          this.loading = false;
+          if (routeSelected) {
+            this.selectRoute(this.routesView[this.routesView.length - 1]);
+          }
+        },
+        error => {
+          console.log(error);
+          return;
+        },
+        () => {
+          this.loading = false;
+        }
+      );
+    });
+  }
 
   public createRoute() {
+    let routeNew = new Route();
     this.dialogService.showDialog(
       DialogRouteDetailComponent,
       {
         data: {
           title: 'Create Route',
-          route: new Route(),
+          route: routeNew,
         },
       },
-      (result: any) => {
+      result => {
         if (result) {
+          this.routeManagementService.addRoute(result).subscribe(routeNewData => {
+            this.routeManagementService.countRoutesByProjectId(1).subscribe(totalRoutesData => {
+              this.totalRoutes = totalRoutesData;
+              this.pagingConfig.totalItems = this.totalRoutes;
+              let pageNumber = Math.ceil(this.pagingConfig.totalItems / Constants.RECORDS_PER_PAGE);
+              if (pageNumber == this.pagingConfig.currentPage) {
+                this.routesView.push(routeNewData);
+                this.selectRoute(this.routesView[this.routesView.length - 1]);
+              } else {
+                this.onPageChange(pageNumber, routeNewData);
+              }
+            });
+          });
         }
       }
     );
   }
 
   public editRoute() {
+    if (!this.routeSelected) {
+      return;
+    }
     this.dialogService.showDialog(
       DialogRouteDetailComponent,
       {
         data: {
-          title: 'Edit Bus Stop',
+          title: 'Edit Route',
           route: this.routeSelected,
         },
       },
-      (result: any) => {
+      result => {
         if (result) {
+          this.routeManagementService.editRoute(result).subscribe(routeEditData => {
+            let index = this.routesView.findIndex(route => route.id == routeEditData.id);
+            this.routesView[index] = routeEditData;
+            this.selectRoute(this.routesView[index]);
+          });
         }
       }
     );
   }
 
   public deleteRoute() {
+    if (!this.routeSelected) {
+      return;
+    }
     this.dialogService.showDialog(
       DialogConfirmComponent,
       {
         data: {
-          text: `Do you want to delete ${this.routeSelected.name}?`,
+          text: `Do you want to delete ${this.routeSelected.name} ?`,
           button1: 'Yes',
           button2: 'No',
         },
       },
-      (result: any) => {
+      result => {
         if (result) {
-          let index = this.routesView.findIndex(route => route.id == this.routeSelected.id);
-          this.routesView.splice(index, 1);
+          this.routeManagementService.deleteRoute(this.routeSelected.id).subscribe(() => {
+            this.routeSelected = undefined;
+            this.onPageChange(this.pagingConfig.currentPage);
+          });
         }
       }
     );
@@ -102,5 +148,8 @@ export class RouteManagementComponent implements OnInit {
     this.isViewBusStop = false;
   }
 
-  public onPageChange(pageNumber: any) {}
+  public onPageChange(pageNumber: any, routeSelected?: Route) {
+    this.pagingConfig.currentPage = pageNumber;
+    this.fetchDataRoutes(this.pagingConfig.currentPage, routeSelected);
+  }
 }

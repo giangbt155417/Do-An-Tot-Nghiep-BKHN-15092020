@@ -1,9 +1,9 @@
+import { PaginationInstance } from 'ngx-pagination';
 import { Component, OnInit } from '@angular/core';
 import { DialogProjectDetailComponent } from 'app/layouts/dialog/dialog-project-detail/dialog-project-detail.component';
 import { DialogService } from 'app/services/dialog.service';
 import { Project } from '../../entities/project';
 import { ProjectManagementService } from 'app/services/project-management.service';
-import { PaginationInstance } from 'ngx-pagination';
 import { Constants } from 'app/utils/constants';
 import { ActionService } from 'app/services/action.service';
 import { DialogConfirmComponent } from 'app/layouts/dialog/dialog-confirm/dialog-confirm.component';
