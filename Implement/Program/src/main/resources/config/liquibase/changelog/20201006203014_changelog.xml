@@ -1,0 +1,332 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="minhp (generated)" id="1602016297797-1">
+        <createSequence incrementBy="50" sequenceName="sequence_generator" startValue="1"/>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-2">
+        <createTable tableName="jhi_persistent_audit_event">
+            <column autoIncrement="true" name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_persistent_audit_eventPK"/>
+            </column>
+            <column name="event_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+            <column name="principal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-3">
+        <createTable tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-4">
+        <createTable tableName="tbl_bus_stop">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_bus_stopPK"/>
+            </column>
+            <column name="bus_stop_no" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="suffix" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-5">
+        <createTable tableName="tbl_bus_stop_nearby_place">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_bus_stop_nearby_placePK"/>
+            </column>
+            <column name="bus_stop_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nearby_place_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-6">
+        <createTable tableName="tbl_content">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_contentPK"/>
+            </column>
+            <column name="content_group_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="height" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="width" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-7">
+        <createTable tableName="tbl_content_group">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_content_groupPK"/>
+            </column>
+            <column name="created_date" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="height" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="width" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-8">
+        <createTable tableName="tbl_nearby_place">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_nearby_placePK"/>
+            </column>
+            <column name="created_date" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="media_id" type="BIGINT"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-9">
+        <createTable tableName="tbl_picture_area">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_picture_areaPK"/>
+            </column>
+            <column name="content_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="height" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="index" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_fix" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="link_data" type="INTEGER"/>
+            <column name="media_id" type="BIGINT"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="object_fit" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="off" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jhi_on" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pos_x" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pos_y" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="width" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-10">
+        <createTable tableName="tbl_project">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_projectPK"/>
+            </column>
+            <column name="created_date" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="expiry_date" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-11">
+        <createTable tableName="tbl_project_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_project_userPK"/>
+            </column>
+            <column name="project_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-12">
+        <createTable tableName="tbl_route">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_routePK"/>
+            </column>
+            <column name="created_date" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="route_no" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="suffix" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-13">
+        <createTable tableName="tbl_route_bus_stop">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_route_bus_stopPK"/>
+            </column>
+            <column name="bus_stop_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_no" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="route_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-14">
+        <createTable tableName="tbl_route_content">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_route_contentPK"/>
+            </column>
+            <column name="content" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="display" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="route_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-15">
+        <createTable tableName="tbl_text_area">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_text_areaPK"/>
+            </column>
+            <column name="background_color" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="font_color" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="font_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="font_size" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="height" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="horizontal_alignment" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="index" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_bold" type="BOOLEAN"/>
+            <column name="is_fix" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_italic" type="BOOLEAN"/>
+            <column name="link_data" type="INTEGER"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="off" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jhi_on" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pos_x" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pos_y" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scroll_direction" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scroll_speed" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scroll_status" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vertical_alignment" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="width" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhp (generated)" id="1602016297797-16">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="FK2ehnyx2si4tjd2nt4q7y40v8m" deferrable="false" initiallyDeferred="false" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

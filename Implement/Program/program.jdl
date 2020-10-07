@@ -1,0 +1,134 @@
+entity Project(tbl_project) {
+	id Long required unique,
+    name String required,
+    owner String required,
+    createdDate String required,
+    expiryDate String required,
+    description String
+}
+
+entity Route(tbl_route) {
+	id Long required unique,
+    name String required,
+    routeNo String required,
+    suffix String required,
+    projectId Long required,
+    createdDate String required,
+    description String
+}
+
+entity BusStop(tbl_bus_stop) {
+	id Long required unique,
+    name String required,
+    busStopNo String required,
+    suffix String required,
+    createdDate String required,
+    description String
+}
+
+entity NearbyPlace(tbl_nearby_place) {
+	id Long required unique,
+    name String required,
+    mediaId Long,
+    createdDate String required,
+    description String
+}
+
+entity LCDContentGroup(tbl_content_group) {
+	id Long required unique,
+    name String required,
+    width Integer required,
+    height Integer required,
+    projectId Long required,
+    createdDate String required,
+    description String
+}
+
+entity LCDContent(tbl_content) {
+	id Long required unique,
+    name String required,
+    width Integer required,
+    height Integer required,
+    lcdContentGroup Long required
+    createdDate String required,
+    description String
+}
+
+entity PictureArea(tbl_picture_area) {
+	id Long required unique,
+    name String required,
+    posX Integer required,
+    posY Integer required,
+    width Integer required,
+    height Integer required,
+    index Integer required,
+    isFix Boolean required,
+    objectFit Integer required,
+    mediaId Long,
+    linkData Integer,
+    on Integer required,
+    off Integer required,
+    type String required,
+    contentId Long required
+}
+
+entity TextArea(tbl_text_area) {
+	id Long required unique,
+    name String required,
+    posX Integer required,
+    posY Integer required,
+    width Integer required,
+    height Integer required,
+    index Integer required,
+    isFix Boolean required,
+    text String required,
+    fontName String required,
+    fontSize String required,
+    isBold Boolean,
+    isItalic Boolean,
+    horizontalAlignment Integer required,
+    verticalAlignment Integer required,
+    fontColor String required,
+    backgroundColor String required,
+    scrollStatus Integer required,
+    scrollDirection Integer required,
+    scrollSpeed Integer required,
+    linkData Integer,
+    on Integer required,
+    off Integer required,
+    type String required,
+    contentId Long required
+}
+
+entity RouteBusStop(tbl_route_bus_stop) {
+	id Long required unique,
+    routeId Long required,
+    busStopId Long required,
+    orderNo Long required
+}
+
+entity BusStopNearbyPlace(tbl_bus_stop_nearby_place) {
+	id Long required unique,
+    busStopId Long required,
+    nearbyPlaceId Long required
+}
+
+entity RouteContent(tbl_route_content) {
+	id Long required unique,
+    routeId Long required,
+    content Long required,
+    display Integer required
+}
+
+entity ProjectUser(tbl_project_user) {
+	id Long required unique,
+    projectId Long required,
+    userId Long required,
+}
+
+paginate Project, Route, BusStop, LCDContentGroup, LCDContent, NearbyPlace with pagination
+dto * with mapstruct except RouteBusStop, BusStopNearbyPlace, RouteContent, ProjectUser
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
