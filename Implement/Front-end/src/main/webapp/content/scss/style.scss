@@ -380,6 +380,8 @@ select:focus {
 
 .paging {
   display: flex;
+  position: absolute;
+  top: calc(100% - 40px);
 }
 
 .custom-pagination a {
@@ -420,4 +422,7 @@ select:focus {
   height: 29px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
+}
+.loader.hidden {
+  display: none;
 }

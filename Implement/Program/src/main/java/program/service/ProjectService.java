@@ -47,4 +47,6 @@ public interface ProjectService {
     void delete(Long id);
 
 	List<ProjectDTO> findProjectsByUserId(Long userId, int pageNumber);
+
+	int countProjectsByUserId(Long userId);
 }

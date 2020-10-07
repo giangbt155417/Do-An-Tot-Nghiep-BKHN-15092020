@@ -3,16 +3,20 @@ package program.service.impl;
 import program.service.RouteService;
 import program.domain.Route;
 import program.repository.RouteRepository;
+import program.service.dto.ProjectDTO;
 import program.service.dto.RouteDTO;
 import program.service.mapper.RouteMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -63,4 +67,16 @@ public class RouteServiceImpl implements RouteService {
         log.debug("Request to delete Route : {}", id);
         routeRepository.deleteById(id);
     }
+
+	@Override
+	public List<RouteDTO> findRoutesByProjectId(Long projectId, int pageNumber) {
+		Pageable pageable = PageRequest.of(pageNumber - 1, 2, Sort.by("id"));
+		List<RouteDTO> routes = routeMapper.toDto(routeRepository.findRoutesByProjectId(projectId, pageable).getContent());
+		return routes;
+	}
+
+	@Override
+	public int countRoutesByProjectId(Long projectId) {
+		return routeRepository.countRoutesByProjectId(projectId);
+	}
 }

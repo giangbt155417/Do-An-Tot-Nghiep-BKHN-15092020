@@ -3,6 +3,7 @@ package program.service.impl;
 import program.service.ProjectService;
 import program.domain.Project;
 import program.repository.ProjectRepository;
+import program.repository.ProjectUserRepository;
 import program.service.dto.ProjectDTO;
 import program.service.mapper.ProjectMapper;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import program.domain.ProjectUser;
 /**
  * Service Implementation for managing {@link Project}.
  */
@@ -32,6 +33,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectMapper projectMapper;
     
+    @Autowired
+    private ProjectUserRepository projectUserRepository;
+    
     public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper) {
         this.projectRepository = projectRepository;
         this.projectMapper = projectMapper;
@@ -42,6 +46,15 @@ public class ProjectServiceImpl implements ProjectService {
         log.debug("Request to save Project : {}", projectDTO);
         Project project = projectMapper.toEntity(projectDTO);
         project = projectRepository.save(project);
+        
+        if(projectDTO.getId() == null) {
+        	Long userId = (long) 1;
+            ProjectUser projectUser = new ProjectUser();
+            projectUser.setProjectId(project.getId());
+            projectUser.setUserId(userId);
+            projectUserRepository.save(projectUser);
+        }
+      
         return projectMapper.toDto(project);
     }
 
@@ -73,5 +86,10 @@ public class ProjectServiceImpl implements ProjectService {
 		Pageable pageable = PageRequest.of(pageNumber - 1, 2, Sort.by("id"));
 		List<ProjectDTO> projects = projectMapper.toDto(projectRepository.findProjectsByUserId(userId, pageable).getContent());
 		return projects;
+	}
+
+	@Override
+	public int countProjectsByUserId(Long userId) {
+		return projectRepository.countProjectsByUserId(userId);
 	}
 }

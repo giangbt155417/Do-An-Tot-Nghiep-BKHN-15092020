@@ -125,9 +125,9 @@ public class ProjectResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
     
-    @GetMapping("/projects/count")
-    public int countAllProject() {
-    	return 0;
+    @GetMapping("/projects/count/user/{userId}")
+    public int countAllProject(@PathVariable Long userId) {
+    	return projectService.countProjectsByUserId(userId);
     }
     
     @GetMapping("/projects/user/{userId}")

@@ -27,4 +27,11 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 					+ "ON prj.id = prju.project_id "
 					+ "WHERE prju.user_id = ?1" ,nativeQuery = true)
 	Page<Project> findProjectsByUserId(Long userId, Pageable pageable);
+	
+	@Query(value="SELECT count(prj.id) "
+			+ "FROM tbl_project prj "
+			+ "LEFT JOIN tbl_project_user prju "
+			+ "ON prj.id = prju.project_id "
+			+ "WHERE prju.user_id = ?1",nativeQuery = true)
+	int countProjectsByUserId(Long userId);
 }

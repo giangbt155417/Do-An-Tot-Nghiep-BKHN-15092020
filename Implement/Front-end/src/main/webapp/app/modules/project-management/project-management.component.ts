@@ -6,6 +6,7 @@ import { ProjectManagementService } from 'app/services/project-management.servic
 import { PaginationInstance } from 'ngx-pagination';
 import { Constants } from 'app/utils/constants';
 import { ActionService } from 'app/services/action.service';
+import { DialogConfirmComponent } from 'app/layouts/dialog/dialog-confirm/dialog-confirm.component';
 
 @Component({
   selector: 'jhi-project-management',
@@ -18,7 +19,7 @@ export class ProjectManagementComponent implements OnInit {
   projectsView: Array<Project> = new Array<Project>();
   loading: boolean = false;
   pageFirst: number = 1;
-  totalProjects: number = 20;
+  totalProjects: number = 0;
   pagingConfig: PaginationInstance = {
     id: 'advanced',
     itemsPerPage: Constants.RECORDS_PER_PAGE,
@@ -33,24 +34,74 @@ export class ProjectManagementComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.projectManagementService.getProjectByUserId(1, 1).subscribe(
-      projectsData => {
-        this.projectsView = projectsData;
+    this.fetchDataProjects(this.pageFirst);
+  }
+
+  private fetchDataProjects(pageNumber: number, projectSelected?: Project) {
+    this.loading = true;
+    this.projectManagementService.countProjectsByUserId(1).subscribe(totalProjectsData => {
+      this.totalProjects = totalProjectsData;
+      this.pagingConfig.totalItems = this.totalProjects;
+      if (this.totalProjects == 0) {
+        this.isNoData = true;
+      } else {
+        this.isNoData = false;
+      }
+      this.projectManagementService.getProjectsByUserId(1, pageNumber).subscribe(
+        projectsData => {
+          this.projectsView = projectsData;
+          this.loading = false;
+          if (projectSelected) {
+            this.selectProject(this.projectsView[this.projectsView.length - 1]);
+          }
+        },
+        error => {
+          console.log(error);
+          return;
+        },
+        () => {
+          this.loading = false;
+        }
+      );
+    });
+  }
+
+  public createProject() {
+    let projectNew = new Project('', 'admin', '', '', '');
+    this.dialogService.showDialog(
+      DialogProjectDetailComponent,
+      {
+        data: {
+          title: 'Create Project',
+          project: projectNew,
+        },
       },
-      error => {
-        console.log(error);
+      result => {
+        if (result) {
+          this.projectManagementService.addProject(result).subscribe(projectNewData => {
+            this.projectManagementService.countProjectsByUserId(1).subscribe(totalProjectsData => {
+              this.totalProjects = totalProjectsData;
+              this.pagingConfig.totalItems = this.totalProjects;
+              let pageNumber = Math.ceil(this.pagingConfig.totalItems / Constants.RECORDS_PER_PAGE);
+              console.log(this.totalProjects);
+              console.log(pageNumber);
+              if (pageNumber == this.pagingConfig.currentPage) {
+                this.projectsView.push(projectNewData);
+                this.selectProject(this.projectsView[this.projectsView.length - 1]);
+              } else {
+                this.onPageChange(pageNumber, projectNewData);
+              }
+            });
+          });
+        }
       }
     );
   }
 
-  public createProject() {
-    this.dialogService.showDialog(DialogProjectDetailComponent, { data: { title: 'Create Project' } }, (result: any) => {
-      if (result) {
-      }
-    });
-  }
-
   public editProject() {
+    if (!this.projectSelected) {
+      return;
+    }
     this.dialogService.showDialog(
       DialogProjectDetailComponent,
       {
@@ -59,14 +110,41 @@ export class ProjectManagementComponent implements OnInit {
           project: this.projectSelected,
         },
       },
-      (result: any) => {
+      result => {
         if (result) {
+          this.projectManagementService.editProject(result).subscribe(projectEditData => {
+            let index = this.projectsView.findIndex(project => project.id == projectEditData.id);
+            this.projectsView[index] = projectEditData;
+            this.selectProject(this.projectsView[index]);
+          });
         }
       }
     );
   }
 
-  public deleteProject() {}
+  public deleteProject() {
+    if (!this.projectSelected) {
+      return;
+    }
+    this.dialogService.showDialog(
+      DialogConfirmComponent,
+      {
+        data: {
+          text: `Do you want to delete ${this.projectSelected.name} ?`,
+          button1: 'Yes',
+          button2: 'No',
+        },
+      },
+      result => {
+        if (result) {
+          this.projectManagementService.deleteProject(this.projectSelected.id).subscribe(() => {
+            this.projectSelected = undefined;
+            this.onPageChange(this.pagingConfig.currentPage);
+          });
+        }
+      }
+    );
+  }
 
   public selectProject(project: Project) {
     this.projectSelected = project;
@@ -75,7 +153,11 @@ export class ProjectManagementComponent implements OnInit {
   public openProject(project: Project) {
     this.projectSelected = project;
     this.actionService.updateMenuState('[Action] Open Project');
+    localStorage.setItem('projectId', this.projectSelected.id);
   }
 
-  public onPageChange(pageNumber: any) {}
+  public onPageChange(pageNumber: any, projectSelected?: Project) {
+    this.pagingConfig.currentPage = pageNumber;
+    this.fetchDataProjects(this.pagingConfig.currentPage, projectSelected);
+  }
 }

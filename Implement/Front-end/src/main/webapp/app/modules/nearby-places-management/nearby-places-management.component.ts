@@ -15,9 +15,9 @@ export class NearbyPlacesManagementComponent implements OnInit {
 
   constructor(private dialogService: DialogService) {
     this.nearbyPlacesView = new Array<NearbyPlace>();
-    for (let index = 0; index < 10; index++) {
+    for (let index = 0; index < 2; index++) {
       let id = index + 1;
-      let place = new NearbyPlace(id, 'AAAAA', '', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+      let place = new NearbyPlace(id, 'KFC', '', 'Chicken fry');
       this.nearbyPlacesView.push(place);
     }
   }

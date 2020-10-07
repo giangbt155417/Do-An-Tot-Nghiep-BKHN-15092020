@@ -2,6 +2,7 @@ package program.web.rest;
 
 import program.service.RouteService;
 import program.web.rest.errors.BadRequestAlertException;
+import program.service.dto.ProjectDTO;
 import program.service.dto.RouteDTO;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -122,5 +123,15 @@ public class RouteResource {
         log.debug("REST request to delete Route : {}", id);
         routeService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+    
+    @GetMapping("/routes/count/project/{projectId}")
+    public int countAllRoute(@PathVariable Long projectId) {
+    	return routeService.countRoutesByProjectId(projectId);
+    }
+    
+    @GetMapping("/routes/project/{projectId}")
+    public List<RouteDTO> getProjectsByUserId(@PathVariable Long projectId, @RequestParam(value = "pageNumber") int pageNumber){
+    	return routeService.findRoutesByProjectId(projectId, pageNumber);
     }
 }

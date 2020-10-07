@@ -6,6 +6,8 @@ import { BusStop } from 'app/entities/bus-stop';
 import { Route } from '../../entities/route';
 import { PaginationInstance } from 'ngx-pagination';
 import { Constants } from 'app/utils/constants';
+import { RouteManagementService } from 'app/services/route-management.service';
+
 @Component({
   selector: 'app-route-management',
   templateUrl: './route-management.component.html',
@@ -25,10 +27,10 @@ export class RouteManagementComponent implements OnInit {
     totalItems: this.totalRoutes,
   };
 
-  constructor(private dialogService: DialogService) {
+  constructor(private dialogService: DialogService, private routeManagementService: RouteManagementService) {
     this.routesView = new Array<Route>();
     for (let index = 0; index < 10; index++) {
-      let route = new Route('01', 'Hà Nội - Hải Phòng', '01', new Array<BusStop>(), 1);
+      let route = new Route('01', 'Hà Nội - Hải Phòng', '01', 1, '20200708', '', new Array<BusStop>());
       this.routesView.push(route);
     }
   }

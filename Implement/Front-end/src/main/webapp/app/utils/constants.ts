@@ -1,5 +1,5 @@
 export class Constants {
-  static readonly RECORDS_PER_PAGE = 10;
+  static readonly RECORDS_PER_PAGE = 2;
   static readonly BACK_END_URL = 'http://localhost:8080/services/';
   static readonly PROGRAM_SERVICE = 'program/';
   static readonly MEDIA_SERVICE = 'media/';

@@ -5,6 +5,7 @@ import program.service.dto.RouteDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -43,4 +44,8 @@ public interface RouteService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+	List<RouteDTO> findRoutesByProjectId(Long projectId, int pageNumber);
+
+	int countRoutesByProjectId(Long projectId);
 }
